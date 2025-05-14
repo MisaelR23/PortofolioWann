@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#15B8A6", secondary: "" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      background-color: #0f172a;
+      color: #e2e8f0;
+      }
+      .video-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background-color: #1e293b;
+      }
+      .video-container.vertical {
+      aspect-ratio: 9/16;
+      }
+      .video-container.horizontal {
+      aspect-ratio: 16/9;
+      }
+      .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      }
+      .video-container:hover .video-overlay {
+      opacity: 1;
+      }
+      .custom-video-player {
+      width: 100%;
+      position: relative;
+      display: none;
+      }
+      .video-controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      }
+      .custom-video-player:hover .video-controls {
+      opacity: 1;
+      }
+      .progress-bar {
+      flex-grow: 1;
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.3);
+      margin: 0 10px;
+      position: relative;
+      cursor: pointer;
+      border-radius: 5px;
+      }
+      .progress {
+      height: 100%;
+      background-color: #15B8A6;
+      width: 0;
+      border-radius: 5px;
+      }
+      .control-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      }
+      .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #1e293b;
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 50;
+      border-radius: 8px;
+      top: 100%;
+      left: 0;
+      }
+      .dropdown:hover .dropdown-menu {
+      display: block;
+      }
+      .lets-talk-btn {
+      position: fixed;
+      top: 100px;
+      right: 30px;
+      z-index: 40;
+      animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+      0% {
+      transform: scale(1);
+      }
+      50% {
+      transform: scale(1.05);
+      }
+      100% {
+      transform: scale(1);
+      }
+      }
+      .hero-section {
+      position: relative;
+      height: 80vh;
+      overflow: hidden;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://readdy.ai/api/search-image?query=professional%2520video%2520production%2520studio%2520with%2520cameras%2C%2520lights%2C%2520and%2520equipment%2C%2520cinematic%2520atmosphere%2C%2520dark%2520mood%2520with%2520dramatic%2520lighting%2C%2520high-end%2520film%2520equipment%2C%2520modern%2520digital%2520cameras%2C%2520professional%2520setting&width=1920&height=1080&seq=1&orientation=landscape') center/cover no-repeat;
+      }
+      .category-filter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      }
+      .filter-btn {
+      padding: 8px 16px;
+      background-color: #1e293b;
+      border: none;
+      color: #e2e8f0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      }
+      .filter-btn.active {
+      background-color: #15B8A6;
+      color: white;
+      }
+      input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+      outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 15px;
+      height: 15px;
+      background: #15B8A6;
+      border-radius: 50%;
+      cursor: pointer;
+      }
+      .custom-checkbox {
+      position: relative;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: #1e293b;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+      }
+      .custom-checkbox.checked::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 7px;
+      width: 6px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .custom-switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      }
+      .custom-switch-input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      }
+      .custom-switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1e293b;
+      transition: .4s;
+      border-radius: 34px;
+      }
+      .custom-switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      }
+      .custom-switch-input:checked + .custom-switch-slider {
+      background-color: #15B8A6;
+      }
+      .custom-switch-input:checked + .custom-switch-slider:before {
+      transform: translateX(26px);
+      }
+      .client-logo {
+      filter: grayscale(100%);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+      }
+      .client-logo:hover {
+      filter: grayscale(0);
+      opacity: 1;
+      }
+      input:not([type="checkbox"]):not([type="radio"]),
+      textarea {
+      background-color: #1e293b;
+      border: 1px solid #2d3748;
+      color: #e2e8f0;
+      padding: 10px 15px;
+      width: 100%;
+      border-radius: 8px;
+      outline: none;
+      }
+      input:focus:not([type="checkbox"]):not([type="radio"]),
+      textarea:focus {
+      border-color: #15B8A6;
+      }
+      select {
+      appearance: none;
+      background-color: #1e293b;
+      border: 1px solid #2d3748;
+      color: #e2e8f0;
+      padding: 10px 15px;
+      width: 100%;
+      border-radius: 8px;
+      outline: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23e2e8f0'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full bg-gray-900 z-50 shadow-lg">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+          <a href="#" class="text-2xl font-['Pacifico'] text-white">logo</a>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="text-white hover:text-primary transition"
+              >Home</a
+            >
+            <div class="dropdown relative">
+              <a
+                href="#projects"
+                class="text-white hover:text-primary transition flex items-center"
+              >
+                Projects
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-down-s-line"></i>
+                </div>
+              </a>
+              <div class="dropdown-menu">
+                <a
+                  href="#video-editing"
+                  class="block px-4 py-2 hover:bg-gray-700 transition"
+                  >Video Editing</a
+                >
+                <a
+                  href="#motion-graphics"
+                  class="block px-4 py-2 hover:bg-gray-700 transition"
+                  >Motion Graphics</a
+                >
+                <a
+                  href="#animation-2d"
+                  class="block px-4 py-2 hover:bg-gray-700 transition"
+                  >Animator 2D</a
+                >
+                <a
+                  href="#broadcasting"
+                  class="block px-4 py-2 hover:bg-gray-700 transition"
+                  >Broadcasting</a
+                >
+              </div>
+            </div>
+            <a href="#contact" class="text-white hover:text-primary transition"
+              >Contact</a
+            >
+          </div>
+          <div class="md:hidden w-8 h-8 flex items-center justify-center">
+            <i class="ri-menu-line text-xl"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Let's Talk Button -->
+    <a
+      href="#contact"
+      class="lets-talk-btn bg-primary text-white px-4 py-2 rounded-button shadow-lg whitespace-nowrap flex items-center"
+    >
+      <div class="w-5 h-5 flex items-center justify-center mr-2">
+        <i class="ri-chat-3-line"></i>
+      </div>
+      Let's Talk
+    </a>
+    <!-- Hero Section -->
+    <section
+      class="hero-section relative flex items-center justify-center overflow-hidden"
+    >
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="absolute w-full h-full object-cover"
+      >
+        <source
+          src="assets/videos/videbg2.mp4"
+          type="video/mp4"
+        />
+      </video>
+      <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+      <div class="container mx-auto px-4 text-center relative z-10">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Welcome to My World of Creativity
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+          a showcase of my passion for storytelling, design, and visual arts. Explore my projects and see how I bring ideas to life through creativity and innovation.
+        </p>
+        <a
+          href="#projects"
+          class="bg-primary text-white px-6 py-3 rounded-button text-lg shadow-lg hover:bg-opacity-90 transition whitespace-nowrap"
+          >Explore My Work</a
+        >
+        <div
+          class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+        >
+          <div class="w-8 h-8 flex items-center justify-center">
+            <i class="ri-arrow-down-line text-2xl"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Featured Projects
+        </h2>
+        <div class="category-filter flex justify-center">
+          <button
+            class="filter-btn active !rounded-button whitespace-nowrap"
+            data-category="all"
+          >
+            All Projects
+          </button>
+          <button
+            class="filter-btn !rounded-button whitespace-nowrap"
+            data-category="video-editing"
+          >
+            Video Editing
+          </button>
+          <button
+            class="filter-btn !rounded-button whitespace-nowrap"
+            data-category="motion-graphics"
+          >
+            Motion Graphics
+          </button>
+          <button
+            class="filter-btn !rounded-button whitespace-nowrap"
+            data-category="animation-2d"
+          >
+            Animator 2D
+          </button>
+          <button
+            class="filter-btn !rounded-button whitespace-nowrap"
+            data-category="broadcasting"
+          >
+            Broadcasting
+          </button>
+          <button
+            class="filter-btn !rounded-button whitespace-nowrap"
+            data-category="vertical-videos"
+          >
+            Vertical Videos
+          </button>
+        </div>
+        <!-- Video Editing Projects -->
+        <div id="video-editing" class="project-category mb-20">
+          <h3 class="text-2xl font-bold mb-8">Video Editing</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Project 1 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=cinematic%2520film%2520scene%2520with%2520professional%2520color%2520grading%2C%2520moody%2520lighting%2C%2520dramatic%2520composition%2C%2520high%2520production%2520value%2C%2520professional%2520cinematography%2C%2520film%2520still%2520from%2520award-winning%2520movie&width=800&height=450&seq=101&orientation=landscape"
+                alt="Commercial Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="custom-video-player">
+                <video src="#" class="w-full"></video>
+                <div class="video-controls">
+                  <button class="control-btn play-pause-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-play-fill"></i>
+                    </div>
+                  </button>
+                  <div class="progress-bar">
+                    <div class="progress"></div>
+                  </div>
+                  <button class="control-btn volume-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-volume-up-fill"></i>
+                    </div>
+                  </button>
+                  <button class="control-btn fullscreen-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-fullscreen-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              
+              <h4 class="mt-3 font-medium text-lg">Luxury Brand Commercial</h4>
+              <p class="text-gray-400">
+                High-end product showcase with cinematic color grading
+              </p>
+            </div>
+            <!-- Project 2 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=documentary%2520style%2520footage%2C%2520interview%2520setup%2520with%2520professional%2520lighting%2C%2520cinematic%2520b-roll%2C%2520storytelling%2520visual%2520composition%2C%2520professional%2520documentary%2520film%2520still&width=800&height=450&seq=102&orientation=landscape"
+                alt="Documentary Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="custom-video-player">
+                <video src="#" class="w-full"></video>
+                <div class="video-controls">
+                  <button class="control-btn play-pause-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-play-fill"></i>
+                    </div>
+                  </button>
+                  <div class="progress-bar">
+                    <div class="progress"></div>
+                  </div>
+                  <button class="control-btn volume-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-volume-up-fill"></i>
+                    </div>
+                  </button>
+                  <button class="control-btn fullscreen-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-fullscreen-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Environmental Documentary
+              </h4>
+              <p class="text-gray-400">
+                Compelling storytelling through expert interview editing
+              </p>
+            </div>
+            <!-- Project 3 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=music%2520video%2520scene%2C%2520artistic%2520lighting%2C%2520dynamic%2520camera%2520movement%2C%2520stylized%2520color%2520grading%2C%2520professional%2520music%2520video%2520production%2C%2520artistic%2520visual%2520composition&width=800&height=450&seq=103&orientation=landscape"
+                alt="Music Video Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="custom-video-player">
+                <video src="#" class="w-full"></video>
+                <div class="video-controls">
+                  <button class="control-btn play-pause-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-play-fill"></i>
+                    </div>
+                  </button>
+                  <div class="progress-bar">
+                    <div class="progress"></div>
+                  </div>
+                  <button class="control-btn volume-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-volume-up-fill"></i>
+                    </div>
+                  </button>
+                  <button class="control-btn fullscreen-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-fullscreen-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Indie Artist Music Video</h4>
+              <p class="text-gray-400">
+                Rhythmic editing with creative visual transitions
+              </p>
+            </div>
+            <!-- Project 4 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=vertical%2520social%2520media%2520content%2C%2520influencer%2520style%2520video%2C%2520vibrant%2520colors%2C%2520modern%2520aesthetic%2C%2520trendy%2520visual%2520style%2C%2520professional%2520vertical%2520video%2520for%2520social%2520media&width=450&height=800&seq=104&orientation=portrait"
+                alt="Social Media Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <div class="custom-video-player">
+                <video src="#" class="w-full"></video>
+                <div class="video-controls">
+                  <button class="control-btn play-pause-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-play-fill"></i>
+                    </div>
+                  </button>
+                  <div class="progress-bar">
+                    <div class="progress"></div>
+                  </div>
+                  <button class="control-btn volume-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-volume-up-fill"></i>
+                    </div>
+                  </button>
+                  <button class="control-btn fullscreen-btn">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                      <i class="ri-fullscreen-line"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Fashion Brand Shorts</h4>
+              <p class="text-gray-400">
+                Vertical format optimized for social media engagement
+              </p>
+            </div>
+            <!-- Additional Projects -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=wedding%2520video%2520scene%2C%2520emotional%2520moment%2C%2520cinematic%2520lighting%2C%2520professional%2520wedding%2520videography%2C%2520romantic%2520atmosphere%2C%2520high-quality%2520wedding%2520film%2520still&width=800&height=450&seq=105&orientation=landscape"
+                alt="Wedding Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Destination Wedding</h4>
+              <p class="text-gray-400">
+                Emotional storytelling with cinematic transitions
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=corporate%2520video%2520production%2C%2520professional%2520business%2520interview%2C%2520clean%2520visual%2520style%2C%2520corporate%2520office%2520setting%2C%2520professional%2520business%2520video%2520production&width=800&height=450&seq=106&orientation=landscape"
+                alt="Corporate Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Corporate Brand Story</h4>
+              <p class="text-gray-400">
+                Professional business narrative with clean editing
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=travel%2520video%2520footage%2C%2520exotic%2520location%2C%2520cinematic%2520landscape%2520shots%2C%2520adventure%2520travel%2520film%2C%2520professional%2520travel%2520videography%2C%2520stunning%2520vista&width=800&height=450&seq=107&orientation=landscape"
+                alt="Travel Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Adventure Travel Series</h4>
+              <p class="text-gray-400">
+                Dynamic editing capturing breathtaking landscapes
+              </p>
+            </div>
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=product%2520advertisement%2520vertical%2520video%2C%2520sleek%2520product%2520showcase%2C%2520minimalist%2520background%2C%2520professional%2520product%2520videography%2C%2520commercial%2520quality%2520vertical%2520format&width=450&height=800&seq=108&orientation=portrait"
+                alt="Product Edit"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Tech Product Launch</h4>
+              <p class="text-gray-400">
+                Vertical format product showcase with sleek transitions
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Motion Graphics Projects -->
+        <div id="motion-graphics" class="project-category mb-20">
+          <h3 class="text-2xl font-bold mb-8">Motion Graphics</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Project 1 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=abstract%2520motion%2520graphics%2C%2520colorful%2520geometric%2520shapes%2C%2520dynamic%2520animation%2C%2520professional%2520motion%2520design%2C%2520fluid%2520movement%2C%2520vibrant%2520colors%2C%2520digital%2520art%2520in%2520motion&width=800&height=450&seq=201&orientation=landscape"
+                alt="Abstract Motion Graphics"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Geometric Abstractions</h4>
+              <p class="text-gray-400">Dynamic shapes with fluid transitions</p>
+            </div>
+            <!-- Project 2 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=corporate%2520motion%2520graphics%2C%2520clean%2520infographic%2520animation%2C%2520data%2520visualization%2C%2520professional%2520business%2520presentation%2C%2520animated%2520charts%2520and%2520graphs%2C%2520sleek%2520design&width=800&height=450&seq=202&orientation=landscape"
+                alt="Corporate Motion Graphics"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Data Visualization</h4>
+              <p class="text-gray-400">
+                Animated infographics for business presentation
+              </p>
+            </div>
+            <!-- Project 3 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=animated%2520logo%2520reveal%2C%2520professional%2520brand%2520animation%2C%2520dynamic%2520logo%2520transformation%2C%2520sleek%2520corporate%2520identity%2520animation%2C%2520modern%2520logo%2520animation&width=800&height=450&seq=203&orientation=landscape"
+                alt="Logo Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Tech Startup Logo Reveal</h4>
+              <p class="text-gray-400">Dynamic brand identity animation</p>
+            </div>
+            <!-- Project 4 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=vertical%2520motion%2520graphics%2C%2520social%2520media%2520animation%2C%2520trendy%2520typography%2520animation%2C%2520dynamic%2520text%2520effects%2C%2520modern%2520vertical%2520format%2520animation&width=450&height=800&seq=204&orientation=portrait"
+                alt="Typography Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Kinetic Typography</h4>
+              <p class="text-gray-400">
+                Animated text effects for social media
+              </p>
+            </div>
+            <!-- Additional Projects -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=explainer%2520video%2520animation%2C%2520educational%2520motion%2520graphics%2C%2520illustrated%2520concept%2520explanation%2C%2520professional%2520information%2520visualization%2C%2520animated%2520explainer&width=800&height=450&seq=205&orientation=landscape"
+                alt="Explainer Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Medical Explainer</h4>
+              <p class="text-gray-400">
+                Complex concepts simplified through animation
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=UI%2520animation%2C%2520app%2520interface%2520motion%2520design%2C%2520interactive%2520elements%2520animation%2C%2520professional%2520UX%2520motion%2C%2520digital%2520product%2520interface%2520animation&width=800&height=450&seq=206&orientation=landscape"
+                alt="UI Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">App Interface Animation</h4>
+              <p class="text-gray-400">
+                Smooth UI transitions and micro-interactions
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=title%2520sequence%2520animation%2C%2520film%2520opening%2520credits%2C%2520dynamic%2520typography%2C%2520cinematic%2520motion%2520graphics%2C%2520professional%2520title%2520design&width=800&height=450&seq=207&orientation=landscape"
+                alt="Title Sequence"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Documentary Title Sequence
+              </h4>
+              <p class="text-gray-400">
+                Cinematic opening credits with dynamic typography
+              </p>
+            </div>
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=vertical%2520product%2520animation%2C%2520e-commerce%2520motion%2520graphics%2C%2520dynamic%2520product%2520showcase%2C%2520professional%2520vertical%2520format%2520product%2520animation&width=450&height=800&seq=208&orientation=portrait"
+                alt="Product Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                E-commerce Product Showcase
+              </h4>
+              <p class="text-gray-400">
+                Vertical format animation highlighting features
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Animator 2D Projects -->
+        <div id="animation-2d" class="project-category mb-20">
+          <h3 class="text-2xl font-bold mb-8">Animator 2D</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Project 1 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=2D%2520character%2520animation%2C%2520stylized%2520cartoon%2520scene%2C%2520expressive%2520character%2520design%2C%2520professional%2520animation%2520frame%2C%2520vibrant%2520colors%2C%2520smooth%2520animation%2520style&width=800&height=450&seq=301&orientation=landscape"
+                alt="Character Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Character Short Story</h4>
+              <p class="text-gray-400">
+                Expressive character animation with personality
+              </p>
+            </div>
+            <!-- Project 2 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=2D%2520explainer%2520animation%2C%2520illustrated%2520educational%2520content%2C%2520flat%2520design%2520animation%2C%2520professional%2520explainer%2520video%2C%2520informative%2520animation%2520style&width=800&height=450&seq=302&orientation=landscape"
+                alt="Explainer Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Financial Service Explainer
+              </h4>
+              <p class="text-gray-400">
+                Complex concepts simplified through animation
+              </p>
+            </div>
+            <!-- Project 3 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=2D%2520animated%2520commercial%2C%2520brand%2520mascot%2520animation%2C%2520stylized%2520advertising%2520animation%2C%2520professional%2520commercial%2520animation%2C%2520product%2520showcase%2520animation&width=800&height=450&seq=303&orientation=landscape"
+                alt="Commercial Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Brand Mascot Commercial</h4>
+              <p class="text-gray-400">
+                Character-driven advertising animation
+              </p>
+            </div>
+            <!-- Project 4 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=vertical%25202D%2520animation%2C%2520social%2520media%2520cartoon%2C%2520character%2520animation%2520for%2520mobile%2C%2520professional%2520vertical%2520format%2520animation%2C%2520stylized%2520vertical%2520content&width=450&height=800&seq=304&orientation=portrait"
+                alt="Social Media Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Social Media Series</h4>
+              <p class="text-gray-400">Vertical format character animations</p>
+            </div>
+            <!-- Additional Projects -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=2D%2520music%2520video%2520animation%2C%2520artistic%2520animated%2520sequence%2C%2520stylized%2520visual%2520music%2520interpretation%2C%2520professional%2520animated%2520music%2520video%2C%2520artistic%2520animation&width=800&height=450&seq=305&orientation=landscape"
+                alt="Music Video Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Animated Music Video</h4>
+              <p class="text-gray-400">
+                Artistic visual interpretation of indie track
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=2D%2520game%2520animation%2C%2520video%2520game%2520cutscene%2C%2520stylized%2520game%2520art%2C%2520professional%2520game%2520animation%2C%2520character%2520game%2520animation&width=800&height=450&seq=306&orientation=landscape"
+                alt="Game Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Game Cutscene Animation</h4>
+              <p class="text-gray-400">
+                Narrative sequence for indie game project
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=2D%2520educational%2520animation%2C%2520childrens%2520learning%2520content%2C%2520colorful%2520educational%2520cartoon%2C%2520professional%2520kids%2520animation%2C%2520educational%2520content&width=800&height=450&seq=307&orientation=landscape"
+                alt="Educational Animation"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Children's Educational Series
+              </h4>
+              <p class="text-gray-400">
+                Engaging learning content for young audience
+              </p>
+            </div>
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=vertical%2520animated%2520story%2C%2520digital%2520storytelling%2C%2520narrative%2520animation%2C%2520professional%2520vertical%2520animation%2C%2520character-driven%2520vertical%2520content&width=450&height=800&seq=308&orientation=portrait"
+                alt="Animated Story"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Animated Short Story</h4>
+              <p class="text-gray-400">Vertical format narrative animation</p>
+            </div>
+          </div>
+        </div>
+        <!-- Vertical Videos -->
+        <div id="vertical-videos" class="project-category mb-20">
+          <h3 class="text-2xl font-bold mb-8">Vertical Videos</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Vertical Video 1 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=fashion%2520vertical%2520video%2C%2520stylish%2520model%2520showcase%2C%2520trendy%2520clothing%2C%2520professional%2520vertical%2520content%2C%2520fashion%2520social%2520media&width=450&height=800&seq=v1&orientation=portrait"
+                alt="Fashion Video"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Summer Collection</h4>
+              <p class="text-gray-400">Fashion brand showcase</p>
+            </div>
+            <!-- Vertical Video 2 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=product%2520review%2520vertical%2520video%2C%2520tech%2520gadget%2520showcase%2C%2520professional%2520product%2520demonstration%2C%2520vertical%2520format%2520review&width=450&height=800&seq=v2&orientation=portrait"
+                alt="Product Review"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Tech Review</h4>
+              <p class="text-gray-400">Product showcase and review</p>
+            </div>
+            <!-- Vertical Video 3 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=dance%2520performance%2520vertical%2520video%2C%2520urban%2520dance%2520style%2C%2520professional%2520choreography%2C%2520vertical%2520dance%2520content&width=450&height=800&seq=v3&orientation=portrait"
+                alt="Dance Performance"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Urban Dance</h4>
+              <p class="text-gray-400">Street dance performance</p>
+            </div>
+            <!-- Vertical Video 4 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=cooking%2520tutorial%2520vertical%2520video%2C%2520food%2520preparation%2C%2520culinary%2520art%2C%2520professional%2520cooking%2520content%2C%2520vertical%2520recipe%2520video&width=450&height=800&seq=v4&orientation=portrait"
+                alt="Cooking Tutorial"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Quick Recipe</h4>
+              <p class="text-gray-400">Easy cooking tutorial</p>
+            </div>
+            <!-- Vertical Video 5 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=fitness%2520workout%2520vertical%2520video%2C%2520exercise%2520routine%2C%2520professional%2520fitness%2520content%2C%2520vertical%2520workout%2520tutorial&width=450&height=800&seq=v5&orientation=portrait"
+                alt="Fitness Video"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">HIIT Workout</h4>
+              <p class="text-gray-400">15-minute fitness routine</p>
+            </div>
+            <!-- Vertical Video 6 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=beauty%2520tutorial%2520vertical%2520video%2C%2520makeup%2520application%2C%2520professional%2520beauty%2520content%2C%2520vertical%2520beauty%2520guide&width=450&height=800&seq=v6&orientation=portrait"
+                alt="Beauty Tutorial"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Makeup Guide</h4>
+              <p class="text-gray-400">Evening look tutorial</p>
+            </div>
+            <!-- Vertical Video 7 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=travel%2520vlog%2520vertical%2520video%2C%2520destination%2520showcase%2C%2520travel%2520experience%2C%2520vertical%2520travel%2520content&width=450&height=800&seq=v7&orientation=portrait"
+                alt="Travel Vlog"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">City Guide</h4>
+              <p class="text-gray-400">Local travel experience</p>
+            </div>
+            <!-- Vertical Video 8 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=music%2520performance%2520vertical%2520video%2C%2520live%2520music%2520recording%2C%2520artist%2520showcase%2C%2520vertical%2520music%2520content&width=450&height=800&seq=v8&orientation=portrait"
+                alt="Music Performance"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Live Session</h4>
+              <p class="text-gray-400">Acoustic performance</p>
+            </div>
+          </div>
+        </div>
+        <!-- Broadcasting Projects -->
+        <div id="broadcasting" class="project-category mb-20">
+          <h3 class="text-2xl font-bold mb-8">Broadcasting</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Project 1 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=sports%2520broadcast%2520production%2C%2520live%2520event%2520coverage%2C%2520professional%2520sports%2520filming%2C%2520broadcast%2520quality%2520camera%2520work%2C%2520dynamic%2520sports%2520videography&width=800&height=450&seq=401&orientation=landscape"
+                alt="Sports Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Regional Basketball Championship
+              </h4>
+              <p class="text-gray-400">Multi-camera live sports coverage</p>
+            </div>
+            <!-- Project 2 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=live%2520event%2520streaming%2C%2520concert%2520broadcast%2C%2520professional%2520event%2520coverage%2C%2520multi-camera%2520production%2C%2520live%2520entertainment%2520broadcast&width=800&height=450&seq=402&orientation=landscape"
+                alt="Event Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Music Festival Live Stream
+              </h4>
+              <p class="text-gray-400">
+                Multi-stage event coverage with real-time mixing
+              </p>
+            </div>
+            <!-- Project 3 -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=news%2520broadcast%2520production%2C%2520professional%2520news%2520studio%2C%2520television%2520news%2520set%2C%2520broadcast%2520journalism%2C%2520news%2520program%2520production&width=800&height=450&seq=403&orientation=landscape"
+                alt="News Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Local News Program</h4>
+              <p class="text-gray-400">
+                Studio production with field reporting integration
+              </p>
+            </div>
+            <!-- Project 4 -->
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=vertical%2520live%2520streaming%2C%2520mobile%2520broadcast%2C%2520social%2520media%2520live%2520content%2C%2520professional%2520vertical%2520broadcast%2C%2520mobile-first%2520live%2520content&width=450&height=800&seq=404&orientation=portrait"
+                alt="Vertical Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Fashion Show Live Stream</h4>
+              <p class="text-gray-400">
+                Vertical format optimized for social platforms
+              </p>
+            </div>
+            <!-- Additional Projects -->
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=corporate%2520webinar%2520production%2C%2520professional%2520virtual%2520event%2C%2520business%2520presentation%2520broadcast%2C%2520professional%2520webcast%2C%2520virtual%2520conference&width=800&height=450&seq=405&orientation=landscape"
+                alt="Webinar Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Tech Conference Webinar</h4>
+              <p class="text-gray-400">
+                Multi-speaker virtual event with graphics integration
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=interview%2520broadcast%2520setup%2C%2520professional%2520talk%2520show%2C%2520studio%2520interview%2520production%2C%2520broadcast%2520quality%2520interview%2C%2520television%2520talk%2520format&width=800&height=450&seq=406&orientation=landscape"
+                alt="Interview Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Celebrity Interview Series
+              </h4>
+              <p class="text-gray-400">
+                Studio talk show with multi-camera setup
+              </p>
+            </div>
+            <div class="video-container horizontal">
+              <img
+                src="https://readdy.ai/api/search-image?query=documentary%2520broadcast%2C%2520professional%2520documentary%2520production%2C%2520television%2520documentary%2C%2520broadcast%2520quality%2520documentary%2C%2520documentary%2520filming&width=800&height=450&seq=407&orientation=landscape"
+                alt="Documentary Broadcast"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">
+                Historical Documentary Series
+              </h4>
+              <p class="text-gray-400">
+                Broadcast-quality documentary production
+              </p>
+            </div>
+            <div class="video-container vertical">
+              <img
+                src="https://readdy.ai/api/search-image?query=behind%2520the%2520scenes%2520vertical%2520video%2C%2520production%2520process%2520footage%2C%2520filmmaking%2520documentary%2C%2520vertical%2520format%2520production%2520content%2C%2520creative%2520process%2520documentation&width=450&height=800&seq=408&orientation=portrait"
+                alt="Behind the Scenes"
+                class="w-full h-full object-cover"
+              />
+              <div class="video-overlay">
+                <button
+                  class="play-btn bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center"
+                >
+                  <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-play-fill text-2xl"></i>
+                  </div>
+                </button>
+              </div>
+              <h4 class="mt-3 font-medium text-lg">Behind The Scenes Series</h4>
+              <p class="text-gray-400">
+                Vertical format production process documentation
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">
+          Let's Work Together
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Contact Form -->
+          <div class="bg-gray-900 p-8 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
+            <form>
+              <div class="mb-6">
+                <label for="name" class="block mb-2 text-sm font-medium"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="John Doe"
+                  class="border-none"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block mb-2 text-sm font-medium"
+                  >Your Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="john@example.com"
+                  class="border-none"
+                />
+              </div>
+              <div class="mb-6">
+                <label for="project-type" class="block mb-2 text-sm font-medium"
+                  >Project Type</label
+                >
+                <div class="relative">
+                  <select id="project-type" class="pr-8 border-none">
+                    <option value="" disabled selected>
+                      Select project type
+                    </option>
+                    <option value="video-editing">Video Editing</option>
+                    <option value="motion-graphics">Motion Graphics</option>
+                    <option value="animation-2d">2D Animation</option>
+                    <option value="broadcasting">Broadcasting</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block mb-2 text-sm font-medium"
+                  >Your Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  placeholder="Tell me about your project..."
+                  class="border-none"
+                ></textarea>
+              </div>
+              <div class="mb-6 flex items-center">
+                <div class="custom-checkbox" id="newsletter-checkbox"></div>
+                <label for="newsletter-checkbox" class="text-sm"
+                  >Subscribe to newsletter for latest updates</label
+                >
+              </div>
+              <button
+                type="submit"
+                class="bg-primary text-white px-6 py-3 rounded-button w-full hover:bg-opacity-90 transition whitespace-nowrap"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+          <!-- Contact Info -->
+          <div>
+            <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+            <div class="mb-8">
+              <p class="mb-4">
+                Feel free to reach out for collaborations, project inquiries, or
+                just to say hello. I'm always open to discussing new projects
+                and creative ideas.
+              </p>
+              <div class="mt-6 space-y-4">
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mr-4"
+                  >
+                    <i class="ri-mail-line text-primary"></i>
+                  </div>
+                  <span>contact@videoportfolio.com</span>
+                </div>
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mr-4"
+                  >
+                    <i class="ri-phone-line text-primary"></i>
+                  </div>
+                  <span>+1 (555) 123-4567</span>
+                </div>
+                <div class="flex items-center">
+                  <div
+                    class="w-10 h-10 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mr-4"
+                  >
+                    <i class="ri-map-pin-line text-primary"></i>
+                  </div>
+                  <span>Los Angeles, California</span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-8">
+              <h4 class="text-xl font-bold mb-4">Working Hours</h4>
+              <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+              <p>Weekend: By appointment only</p>
+            </div>
+            <div>
+              <h4 class="text-xl font-bold mb-4">Follow Me</h4>
+              <div class="flex space-x-4">
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-primary transition rounded-full"
+                >
+                  <i class="ri-instagram-line"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-primary transition rounded-full"
+                >
+                  <i class="ri-linkedin-line"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-primary transition rounded-full"
+                >
+                  <i class="ri-youtube-line"></i>
+                </a>
+                <a
+                  href="#"
+                  class="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-primary transition rounded-full"
+                >
+                  <i class="ri-vimeo-line"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <!-- About -->
+          <div>
+            <a
+              href="#"
+              class="text-2xl font-['Pacifico'] text-white mb-4 inline-block"
+              >logo</a
+            >
+            <p class="text-gray-400 mb-6">
+              Creating compelling visual stories through video editing, motion
+              graphics, animation, and broadcasting services.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-primary transition">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-instagram-line"></i>
+                </div>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-linkedin-line"></i>
+                </div>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-youtube-line"></i>
+                </div>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-primary transition">
+                <div class="w-6 h-6 flex items-center justify-center">
+                  <i class="ri-vimeo-line"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- Quick Links -->
+          <div>
+    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+    <ul class="space-y-2">
+      <li>
+  <a href="index.html" class="text-gray-400 hover:text-primary transition">Home</a>
+</li>
+    </ul>
+  </div>
+              <li>
+                <a
+                  href="#projects"
+                  class="text-gray-400 hover:text-primary transition"
+                  >Projects</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#video-editing"
+                  class="text-gray-400 hover:text-primary transition"
+                  >Video Editing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#motion-graphics"
+                  class="text-gray-400 hover:text-primary transition"
+                  >Motion Graphics</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#animation-2d"
+                  class="text-gray-400 hover:text-primary transition"
+                  >Animation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#broadcasting"
+                  class="text-gray-400 hover:text-primary transition"
+                  >Broadcasting</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-400 hover:text-primary transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Newsletter -->
+          <div>
+            <h4 class="text-lg font-bold mb-4">Subscribe to Newsletter</h4>
+            <p class="text-gray-400 mb-4">
+              Stay updated with the latest projects and news
+            </p>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="flex-grow border-none rounded-l-button"
+              />
+              <button
+                type="submit"
+                class="bg-primary text-white px-4 py-2 rounded-r-button whitespace-nowrap"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <!-- Clients -->
+        <div class="mb-12">
+          <h4 class="text-lg font-bold mb-6 text-center">Trusted By</h4>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+            <div class="flex items-center justify-center">
+              <div
+                class="client-logo w-8 h-8 flex items-center justify-center mr-2"
+              >
+                <i class="ri-netflix-fill text-3xl"></i>
+              </div>
+              <span class="text-gray-400">Netflix</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <div
+                class="client-logo w-8 h-8 flex items-center justify-center mr-2"
+              >
+                <i class="ri-spotify-fill text-3xl"></i>
+              </div>
+              <span class="text-gray-400">Spotify</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <div
+                class="client-logo w-8 h-8 flex items-center justify-center mr-2"
+              >
+                <i class="ri-amazon-fill text-3xl"></i>
+              </div>
+              <span class="text-gray-400">Amazon</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <div
+                class="client-logo w-8 h-8 flex items-center justify-center mr-2"
+              >
+                <i class="ri-google-fill text-3xl"></i>
+              </div>
+              <span class="text-gray-400">Google</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <div
+                class="client-logo w-8 h-8 flex items-center justify-center mr-2"
+              >
+                <i class="ri-apple-fill text-3xl"></i>
+              </div>
+              <span class="text-gray-400">Apple</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <div
+                class="client-logo w-8 h-8 flex items-center justify-center mr-2"
+              >
+                <i class="ri-microsoft-fill text-3xl"></i>
+              </div>
+              <span class="text-gray-400">Microsoft</span>
+            </div>
+          </div>
+        </div>
+        <!-- Copyright -->
+        <div class="border-t border-gray-800 pt-8 text-center">
+          <p class="text-gray-500">
+            &copy; 2025 Portfolio Ridwan. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Filter functionality
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const projectCategories = document.querySelectorAll(".project-category");
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            // Remove active class from all buttons
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            // Add active class to clicked button
+            this.classList.add("active");
+            const category = this.getAttribute("data-category");
+            if (category === "all") {
+              projectCategories.forEach((cat) => (cat.style.display = "block"));
+            } else {
+              projectCategories.forEach((cat) => {
+                if (cat.id === category) {
+                  cat.style.display = "block";
+                } else {
+                  cat.style.display = "none";
+                }
+              });
+            }
+          });
+        });
+        // Video player functionality
+        const playBtns = document.querySelectorAll(".play-btn");
+        playBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const container = this.closest(".video-container");
+            const overlay = container.querySelector(".video-overlay");
+            const videoPlayer = container.querySelector(".custom-video-player");
+            const video = videoPlayer.querySelector("video");
+            // Hide thumbnail and overlay, show video player
+            container.querySelector("img").style.display = "none";
+            overlay.style.display = "none";
+            videoPlayer.style.display = "block";
+            // Set video source if not already set (in a real implementation)
+            if (!video.src) {
+              // This would be set to a real video URL
+              video.src = "https://example.com/video.mp4";
+            }
+            // Play video
+            video.play();
+          });
+        });
+        // Video controls functionality
+        const videoPlayers = document.querySelectorAll(".custom-video-player");
+        videoPlayers.forEach((player) => {
+          const video = player.querySelector("video");
+          const playPauseBtn = player.querySelector(".play-pause-btn");
+          const volumeBtn = player.querySelector(".volume-btn");
+          const fullscreenBtn = player.querySelector(".fullscreen-btn");
+          const progressBar = player.querySelector(".progress-bar");
+          const progress = player.querySelector(".progress");
+          // Play/Pause
+          playPauseBtn.addEventListener("click", function () {
+            const icon = this.querySelector("i");
+            if (video.paused) {
+              video.play();
+              icon.classList.remove("ri-play-fill");
+              icon.classList.add("ri-pause-fill");
+            } else {
+              video.pause();
+              icon.classList.remove("ri-pause-fill");
+              icon.classList.add("ri-play-fill");
+            }
+          });
+          // Volume
+          volumeBtn.addEventListener("click", function () {
+            const icon = this.querySelector("i");
+            if (video.muted) {
+              video.muted = false;
+              icon.classList.remove("ri-volume-mute-fill");
+              icon.classList.add("ri-volume-up-fill");
+            } else {
+              video.muted = true;
+              icon.classList.remove("ri-volume-up-fill");
+              icon.classList.add("ri-volume-mute-fill");
+            }
+          });
+          // Fullscreen
+          fullscreenBtn.addEventListener("click", function () {
+            if (video.requestFullscreen) {
+              video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+              video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+              video.msRequestFullscreen();
+            }
+          });
+          // Progress bar
+          video.addEventListener("timeupdate", function () {
+            const percentage = (video.currentTime / video.duration) * 100;
+            progress.style.width = percentage + "%";
+          });
+          progressBar.addEventListener("click", function (e) {
+            const pos =
+              (e.pageX - this.getBoundingClientRect().left) / this.offsetWidth;
+            video.currentTime = pos * video.duration;
+          });
+        });
+        // Custom checkbox
+        const checkbox = document.getElementById("newsletter-checkbox");
+        checkbox.addEventListener("click", function () {
+          this.classList.toggle("checked");
+        });
+      });
+    </script>
+  </body>
+</html>

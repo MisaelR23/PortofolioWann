@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ridwan Syahdikin - Creative Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#15B8A6", secondary: "" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+
+      body {
+          font-family: 'Inter', sans-serif;
+          background-color: #0f172a;
+          color: #f8fafc;
+      }
+
+      .parallax {
+          background-attachment: fixed;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+
+      .timeline-item {
+          position: relative;
+          padding-left: 2rem;
+          margin-bottom: 2rem;
+      }
+
+      .timeline-item::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0.5rem;
+          width: 1rem;
+          height: 1rem;
+          background-color: #15B8A6;
+          border-radius: 50%;
+      }
+
+      .timeline-item::after {
+          content: '';
+          position: absolute;
+          left: 0.5rem;
+          top: 1.5rem;
+          width: 0.125rem;
+          height: calc(100% + 1rem);
+          background-color: #334155;
+      }
+
+      .timeline-item:last-child::after {
+          display: none;
+      }
+
+      .custom-video-controls {
+          position: absolute;
+          bottom: 1rem;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s;
+      }
+
+      .video-container:hover .custom-video-controls {
+          opacity: 1;
+      }
+
+      input[type="range"] {
+          -webkit-appearance: none;
+          appearance: none;
+          height: 0.25rem;
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 0.125rem;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 0.75rem;
+          height: 0.75rem;
+          background: #15B8A6;
+          border-radius: 50%;
+          cursor: pointer;
+      }
+
+      .custom-checkbox {
+          position: relative;
+          display: inline-block;
+          width: 1.25rem;
+          height: 1.25rem;
+          border: 2px solid #64748b;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+
+      .custom-checkbox.checked {
+          background-color: #15B8A6;
+          border-color: #15B8A6;
+      }
+
+      .custom-checkbox.checked::after {
+          content: '';
+          position: absolute;
+          left: 0.3rem;
+          top: 0.1rem;
+          width: 0.4rem;
+          height: 0.7rem;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+
+      .custom-switch {
+          position: relative;
+          display: inline-block;
+          width: 3rem;
+          height: 1.5rem;
+      }
+
+      .custom-switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+      }
+
+      .switch-slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #334155;
+          transition: .4s;
+          border-radius: 1.5rem;
+      }
+
+      .switch-slider:before {
+          position: absolute;
+          content: "";
+          height: 1.1rem;
+          width: 1.1rem;
+          left: 0.2rem;
+          bottom: 0.2rem;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+      }
+
+      input:checked + .switch-slider {
+          background-color: #15B8A6;
+      }
+
+      input:checked + .switch-slider:before {
+          transform: translateX(1.5rem);
+      }
+
+      .custom-radio {
+          position: relative;
+          display: inline-block;
+          width: 1.25rem;
+          height: 1.25rem;
+          border: 2px solid #64748b;
+          border-radius: 50%;
+          cursor: pointer;
+      }
+
+      .custom-radio.checked {
+          border-color: #15B8A6;
+      }
+
+      .custom-radio.checked::after {
+          content: '';
+          position: absolute;
+          left: 0.25rem;
+          top: 0.25rem;
+          width: 0.5rem;
+          height: 0.5rem;
+          background-color: #15B8A6;
+          border-radius: 50%;
+      }
+
+      .nav-link {
+          position: relative;
+      }
+
+      .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -4px;
+          left: 0;
+          background-color: #15B8A6;
+          transition: width 0.3s;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+          width: 100%;
+      }
+
+      .project-card {
+          overflow: hidden;
+          position: relative;
+      }
+
+      .project-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(15, 23, 42, 0.8);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          transition: opacity 0.3s;
+      }
+
+      .project-card:hover .project-overlay {
+          opacity: 1;
+      }
+
+      .back-to-top {
+          position: fixed;
+          bottom: 2rem;
+          right: 2rem;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s, visibility 0.3s;
+      }
+
+      .back-to-top.visible {
+          opacity: 1;
+          visibility: visible;
+      }
+
+      select {
+          appearance: none;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 0.5rem center;
+          background-size: 1.5em 1.5em;
+      }
+
+      input:not([type="checkbox"]):not([type="radio"]),
+      textarea {
+          background-color: #1e293b;
+          border: 1px solid #334155;
+          color: #f8fafc;
+          outline: none;
+          transition: border-color 0.3s;
+      }
+
+      input:not([type="checkbox"]):not([type="radio"]):focus,
+      textarea:focus {
+          border-color: #15B8A6;
+      }
+
+      .tab-button {
+          position: relative;
+          transition: color 0.3s;
+      }
+
+      .tab-button::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: #15B8A6;
+          transition: width 0.3s;
+      }
+
+      .tab-button.active {
+          color: #15B8A6;
+      }
+
+      .tab-button.active::after {
+          width: 100%;
+      }
+
+      .experience-card {
+          transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .experience-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      }
+
+      .skill-tag {
+          background-color: rgba(21, 184, 166, 0.1);
+          color: #15B8A6;
+          border: 1px solid rgba(21, 184, 166, 0.3);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <!-- Navigation -->
+    <header
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-300"
+      id="navbar"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <a href="#home" class="text-2xl font-['Pacifico'] text-white">Wann</a>
+
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#home"
+            class="nav-link text-white hover:text-primary transition-colors active"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link text-white hover:text-primary transition-colors"
+            >About</a
+          >
+          <a
+            href="#projects"
+            class="nav-link text-white hover:text-primary transition-colors"
+            >Projects</a
+          >
+          <a
+            href="#education"
+            class="nav-link text-white hover:text-primary transition-colors"
+            >Education</a
+          >
+          <a
+            href="#experience"
+            class="nav-link text-white hover:text-primary transition-colors"
+            >Experience</a
+          >
+          <a
+            href="#video"
+            class="nav-link text-white hover:text-primary transition-colors"
+            >Video</a
+          >
+          <a
+            href="#contact"
+            class="nav-link text-white hover:text-primary transition-colors"
+            >Contact</a
+          >
+        </nav>
+
+        <button
+          class="md:hidden w-10 h-10 flex items-center justify-center text-white"
+          id="mobile-menu-button"
+        >
+          <i class="ri-menu-line ri-lg"></i>
+        </button>
+      </div>
+
+<a
+  href="#contact"
+  class="lets-talk-btn hidden md:flex items-center bg-primary text-white px-6 py-2 !rounded-button font-medium whitespace-nowrap fixed top-3 right-6 z-50"
+>
+  <span>Let's Talk</span>
+  <div class="w-5 h-5 ml-2 flex items-center justify-center">
+    <i class="ri-arrow-right-line"></i>
+  </div>
+</a>
+
+<!-- Mobile Menu -->
+<div
+  class="md:hidden bg-[#0f172a] w-full absolute top-full left-0 py-4 px-6 hidden"
+  id="mobile-menu"
+>
+  <div class="flex flex-col space-y-4">
+    <a
+      href="#home"
+      class="text-white hover:text-primary transition-colors py-2"
+      >Home</a
+    >
+    <a
+      href="#about"
+      class="text-white hover:text-primary transition-colors py-2"
+      >About</a
+    >
+    <a
+      href="#projects"
+      class="text-white hover:text-primary transition-colors py-2"
+      >Projects</a
+    >
+    <a
+      href="#education"
+      class="text-white hover:text-primary transition-colors py-2"
+      >Education</a
+    >
+    <a
+      href="#experience"
+      class="text-white hover:text-primary transition-colors py-2"
+      >Experience</a
+    >
+    <a
+      href="#video"
+      class="text-white hover:text-primary transition-colors py-2"
+      >Video</a
+    >
+    <a
+      href="#contact"
+      class="text-white hover:text-primary transition-colors py-2"
+      >Contact</a
+    >
+    <!-- Let's Talk Button (for mobile) -->
+<a
+  href="#contact"
+  class="lets-talk-btn md:hidden flex items-center bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap mt-6"
+>
+  <span class="text-sm">Let's Talk</span> <!-- Reduced font size -->
+  <div class="w-4 h-4 ml-2 flex items-center justify-center"> <!-- Smaller icon size -->
+    <i class="ri-arrow-right-line"></i>
+  </div>
+</a>
+  </div>
+</div>
+    </header>
+<section
+  id="home"
+  class="relative h-screen flex items-center justify-center overflow-hidden"
+>
+  <div class="absolute inset-0 z-0">
+    <!-- Menggunakan iframe untuk menampilkan HTML lain sebagai latar belakang -->
+    <iframe src="background.html" class="w-full h-full object-cover border-none"></iframe>
+    <div class="absolute inset-0 bg-[#0f172a] bg-opacity-70"></div>
+  </div>
+
+  <div class="container mx-auto px-6 z-10 w-full">
+    <div
+      class="max-w-3xl mx-auto text-center"
+      data-parallax="true"
+      data-speed="0.2"
+    >
+      <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">
+        Hi, I'm <span class="text-primary">Ridwan Syahdikin</span>
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 text-gray-300">
+        Video Editor & Motion Designer
+      </p>
+      <p class="text-lg mb-10 text-gray-300 max-w-2xl mx-auto">
+        The creative mind sees beyond the ordinary, transforms the mundane into the extraordinary,
+        and brings color to a world of infinite potential.
+      </p>
+      <a
+        href="#projects"
+        class="inline-block bg-primary text-white px-8 py-3 rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap"
+      >
+        View My Work
+      </a>
+    </div>
+  </div>
+</section>
+    <!-- About Me Section -->
+    <section id="about" class="py-20 bg-[#1e293b]">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+          About <span class="text-primary">Me</span>
+        </h2>
+
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="w-full md:w-2/5 relative">
+            <div
+              class="rounded-lg overflow-hidden transform transition-transform hover:scale-[1.02] shadow-xl"
+            >
+              <img
+                src="assets/images/fotoridwan.png"
+                alt="Alex Morgan"
+                class="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+
+          <div class="w-full md:w-3/5">
+            <h3 class="text-2xl font-semibold mb-4">
+              Motion Graphic Editor
+            </h3>
+            <p class="text-gray-300 mb-6 leading-relaxed">
+               My name is Ridwan Syahdikin, I am 29 years old and I am an experienced professional
+               currently serving as a Motion Graphic Video Editor and Videographer Broadcasting,
+               with over 6 years of experience in the creative industry. I have a proven track
+               record in producing high-quality motion graphics and video content, while efficiently
+               managing and leading production teams to deliver exceptional results.
+      With a strong passion for storytelling through visuals and an eye for detail, I have successfully
+      developed a wide range of creative projects across digital platforms and various media. Known for
+      my innovative approach, commitment to excellence, and ability to execute complex projects, I am
+      dedicated to producing visually engaging content that resonates with audiences and enhances brand messaging.
+            </p>
+            <p class="text-gray-300 mb-8 leading-relaxed">
+              I've had the privilege of working with clients ranging from
+              startups to Fortune 500 companies, helping them solve complex
+              design challenges and create products that users love. My
+              expertise spans across UI/UX design, brand identity, motion
+              graphics, and creative direction.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div>
+                <h4 class="text-lg font-medium mb-3 text-primary">
+                  Skills
+                </h4>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Video Production
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Video Editor
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Motion Graphics
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Broadcaster
+                  </li>
+                    <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Web Design
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-medium mb-3 text-primary">
+                  Technical Skills
+                </h4>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Adobe Suite
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Davinci Resolve
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Videographer/photographer
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    Sound engineering
+                  </li>
+                  <li class="flex items-center">
+                    <span
+                      class="w-6 h-6 flex items-center justify-center mr-2 text-primary"
+                    >
+                      <i class="ri-check-line"></i>
+                    </span>
+                    HTML, CSS, JavaScript
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="https://www.linkedin.com/in/misael-ridwan-syahdikin-509a3b161/"
+                class="flex items-center gap-2 px-4 py-2 bg-[#1e293b] hover:bg-[#2d3748] rounded-button transition-colors whitespace-nowrap"
+              >
+                <span class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-linkedin-fill"></i>
+                </span>
+                LinkedIn
+              </a>
+              <a
+                href="https://www.instagram.com/heymisaelr/"
+                class="flex items-center gap-2 px-4 py-2 bg-[#1e293b] hover:bg-[#2d3748] rounded-button transition-colors whitespace-nowrap"
+              >
+                <span class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-instagram-fill"></i>
+                </span>
+                Instagram
+              </a>
+              <a
+                href="https://wa.me/6289611606905?text=Halo,%20saya%20ingin%20bertanya"
+                class="flex items-center gap-2 px-4 py-2 bg-[#1e293b] hover:bg-[#2d3748] rounded-button transition-colors whitespace-nowrap"
+              >
+                <span class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-whatsapp-fill"></i>
+                </span>
+                Whatsapp
+              </a>
+              <a
+                href="#contact"
+                class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-opacity-90 rounded-button transition-colors whitespace-nowrap"
+              >
+                <span class="w-5 h-5 flex items-center justify-center">
+                  <i class="ri-mail-line"></i>
+                </span>
+                Contact Me
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-[#0f172a]">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">
+          My <span class="text-primary">Education</span>
+        </h2>
+        <p class="text-gray-300 text-center max-w-2xl mx-auto mb-16">
+          My academic journey has equipped me with both theoretical knowledge
+          and practical skills in design, technology, and creative
+          problem-solving.
+        </p>
+
+        <div class="max-w-3xl mx-auto">
+          <!-- Education Item 1 -->
+          <div class="timeline-item">
+            <div class="bg-[#1e293b] p-6 rounded-lg">
+              <div
+                class="flex flex-col md:flex-row md:items-center justify-between mb-4"
+              >
+                <h3 class="text-xl font-semibold">
+                  Computer Science
+                </h3>
+                <span class="text-primary font-medium">2016 - 2020</span>
+              </div>
+              <h4 class="text-lg mb-3">Bogor Pakuan University</h4>
+              <p class="text-gray-300 mb-4">
+                Education in Computer Science and Multimedia blends computer science with multimedia production. Students gain skills in programming, digital media, web design, animation, and multimedia technologies. The curriculum covers topics like software development, graphic design, video editing, and interactive media.
+
+Graduates are prepared for careers in entertainment, gaming, web development, and digital media, creating innovative digital content and engaging experiences across various platforms. Practical projects and internships help students apply their skills in real-world settings.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Web Design</span
+                >
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Multimedia</span
+                >
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >UI/UX</span
+                >
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Programmer</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Education Item 2 -->
+          <div class="timeline-item">
+            <div class="bg-[#1e293b] p-6 rounded-lg">
+              <div
+                class="flex flex-col md:flex-row md:items-center justify-between mb-4"
+              >
+                <h3 class="text-xl font-semibold">
+                  Multimedia
+                </h3>
+                <span class="text-primary font-medium">2012 - 2015</span>
+              </div>
+              <h4 class="text-lg mb-3">SMK Tunas Multi Raya</h4>
+              <p class="text-gray-300 mb-4">
+                Multimedia Education: Video Editing, Video Production, Graphic Design, Animation, and Motion Graphics
+
+Multimedia education combines various digital media disciplines to create content across different platforms. It includes skills in video editing, production, graphic design, animation, and motion graphics, preparing students for careers in creative industries like film, advertising, and digital media.
+
+1. Video Editing
+Video editing involves processing raw video footage to create a polished final product. Students learn to cut, add transitions, color grade, and integrate sound effects using tools like Adobe Premiere Pro or Final Cut Pro.
+
+2. Video Production
+Video production covers planning, shooting, and directing video content. Students learn camera techniques, lighting, and composition to produce high-quality videos from concept to execution.
+
+3. Graphic Design
+Graphic design focuses on creating visual content for communication, such as logos, posters, and digital graphics. Students master design software like Adobe Photoshop and Illustrator to produce visually compelling work.
+
+4. Animation
+Animation teaches how to create movement from static images. Students learn 2D and 3D animation using software like Blender or Adobe After Effects to bring characters and stories to life.
+
+5. Motion Graphics
+Motion graphics involves creating dynamic visuals through animated graphics and text. Students use software like Adobe After Effects to design engaging graphics that enhance storytelling in videos and advertisements.
+
+Conclusion
+Multimedia education equips students with the technical and creative skills necessary for producing impactful visual content, preparing them for roles in various industries like film, advertising, and digital media.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Visual Design</span
+                >
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Typography</span
+                >
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Brand Identity</span
+                >
+                <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                  >Print Design</span
+                >
+              </div>
+            </div>
+          </div>
+
+         
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-[#1e293b]">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">
+          Work <span class="text-primary">Experience</span>
+        </h2>
+        <p class="text-gray-300 text-center max-w-2xl mx-auto mb-16">
+          My professional journey has provided me with the opportunity to collaborate with diverse teams and clients, developing innovative web design solutions, creating engaging video productions, and capturing compelling moments through photography across various industries.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-2 gap-8 mb-12 justify-items-center">
+          <!-- Experience 1 -->
+          <div class="experience-card bg-[#0f172a] p-6 rounded-lg">
+            <div class="flex items-start mb-4">
+              <div
+                class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="ri-building-4-line ri-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold">Senior Video Editor, Motion Graphic, & Broadcaster</h3>
+                <p class="text-primary">Arcade Aces</p>
+                <p class="text-sm text-gray-400">Jan - Apr 2025</p>
+              </div>
+            </div>
+
+            <p class="text-gray-300 mb-4">
+              With extensive experience in multimedia content creation and esports production, I specialize in delivering high-quality, engaging content that resonates with audiences across various platforms. My work spans across video editing, motion graphics, and live broadcast coordination, particularly within the esports industry.
+            </p>
+
+            <div class="mb-4">
+              <h4 class="text-sm font-medium mb-2 text-gray-300">
+                Key Responsibilities:
+              </h4>
+              <ul class="space-y-1 text-gray-400 text-sm">
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Video Editing:
+
+Edit and optimize a wide range of content formats, including vlogs, gameplay footage, TikTok Shorts, Instagram Reels, and YouTube Shorts.
+
+Ensure high-quality output, maintaining consistency and attention to detail to deliver visually compelling and engaging videos.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Esports Content Production:
+
+Create and curate engaging memes, highlight reels, and promotional materials for fighting game tournaments.
+
+Focus on increasing audience engagement through creative content that resonates with viewers and enhances tournament excitement.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Motion Graphics Creation:
+
+Design and integrate dynamic motion graphics for events, such as tournament graphics, transitions, and overlays.
+
+Enhance the visual experience for viewers by creating aesthetically pleasing and informative motion graphics that complement the event’s branding and narrative.
+                </li>
+                 <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Live Broadcast Coordination:
+
+Oversee and manage the live streaming of esports tournaments, ensuring seamless execution and professional presentation.
+
+Maintain high viewer satisfaction through effective live stream management, technical troubleshooting, and real-time coordination with teams and hosts.
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Video Editing</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Motion Graphic</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Broadcaster</span
+              >
+            </div>
+          </div>
+
+          <!-- Experience 2 -->
+          <div class="experience-card bg-[#0f172a] p-6 rounded-lg">
+            <div class="flex items-start mb-4">
+              <div
+                class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="ri-computer-line ri-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold">Senior Video Editor, Motion Graphic, & Broadcaster</h3>
+                <p class="text-primary">Persija Esport</p>
+                <p class="text-sm text-gray-400">September 2023 - Desember 2024</p>
+              </div>
+            </div>
+
+            <p class="text-gray-300 mb-4">
+              I bring a wealth of experience in multimedia content creation, specializing in video editing, esports content production, motion graphics design, and live broadcast coordination. With a strong focus on high-quality production and audience engagement, I have successfully delivered innovative solutions across multiple digital platforms.
+            </p>
+
+            <div class="mb-4">
+              <h4 class="text-sm font-medium mb-2 text-gray-300">
+                Key Responsibilities:
+              </h4>
+              <ul class="space-y-1 text-gray-400 text-sm">
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Video Editing:
+
+Edit and optimize diverse content formats, including vlogs, gameplay footage, TikTok Shorts, Instagram Reels, and YouTube Shorts.
+
+Ensure polished, high-quality output that aligns with platform-specific requirements while maintaining visual consistency and storytelling.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Esports Content Production:
+
+Develop and curate engaging content such as memes, highlight reels, and promotional materials specifically for fighting game tournaments.
+
+Strategically create content to drive audience interaction and excitement around the tournaments, enhancing viewer engagement.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                 Motion Graphics Creation:
+
+Design and integrate dynamic motion graphics for live events, including event branding, transitions, and on-screen visuals.
+
+Elevate the viewer's visual experience by producing high-quality motion graphics that align with the event’s theme and audience expectations.
+                </li>
+                   <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                Live Broadcast Coordination:
+
+Oversee and manage the live streaming of esports tournaments, ensuring smooth and professional presentation across various platforms.
+
+Ensure seamless execution through live coordination, managing technical setups, and addressing real-time challenges to maintain high-quality stream output and viewer satisfaction.
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Video Editing</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Motion Graphic</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Broadcaster</span
+              >
+            </div>
+          </div>
+
+          <!-- Experience 3 -->
+          <div class="experience-card bg-[#0f172a] p-6 rounded-lg">
+            <div class="flex items-start mb-4">
+              <div
+                class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="ri-paint-brush-line ri-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold">Video Editor, Motion Graphic, & Broadcaster</h3>
+                <p class="text-primary">Agency Stun.gg / Aura
+Esports</p>
+                <p class="text-sm text-gray-400">Sep 2022 - Desember 2023</p>
+              </div>
+            </div>
+
+            <p class="text-gray-300 mb-4">
+              I oversaw video editing for educational content, motion graphics creation, and live stream management. I ensured high-quality visuals and sound, worked collaboratively to refine the creative vision, and handled final revisions. Additionally, I edited sponsor and endorsement content and coordinated live broadcasts to ensure professionalism and audience engagement.
+            </p>
+
+            <div class="mb-4">
+              <h4 class="text-sm font-medium mb-2 text-gray-300">
+                Key Responsibilities:
+              </h4>
+              <ul class="space-y-1 text-gray-400 text-sm">
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                 Video Editing:
+Edit and enhance educational videos with text, graphics, and animations to ensure engaging and informative content.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Motion Graphics & Live Stream Management:
+Create motion graphics and manage live stream broadcasts to support content and audience engagement.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                Video Quality:
+Maintain high video quality through color correction and audio adjustments.
+
+
+                </li>
+                 <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                Collaboration:
+Work with the team to align with the creative vision and incorporate feedback.
+
+
+                </li>
+                 <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                Final Revisions:
+Implement feedback and finalize videos for distribution.
+
+
+                </li>
+                 <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                Endorsement & Sponsorship:
+Edit talent endorsements and sponsor videos to align with brand messaging.
+
+
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                Professional Broadcasting:
+Coordinate live broadcasts for sponsor events, focusing on professionalism and engagement.
+
+
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Video Editing</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Motion Graphic</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Broadcaster</span
+              >
+            </div>
+          </div>
+
+          <!-- Experience 4 -->
+          <div class="experience-card bg-[#0f172a] p-6 rounded-lg">
+            <div class="flex items-start mb-4">
+              <div
+                class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4"
+              >
+                <i class="ri-briefcase-4-line ri-xl text-primary"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold">Animtor 2D</h3>
+                <p class="text-primary">KidsLoops</p>
+                <p class="text-sm text-gray-400">Sep - Octo 2022</p>
+              </div>
+            </div>
+
+            <p class="text-gray-300 mb-4">
+              In this role, I was responsible for editing and enhancing animation videos tailored for elementary school students, transforming educational content into engaging and visually appealing materials. My tasks included ensuring the synchronization of visuals, text, and audio to create an immersive learning experience. I collaborated with educational experts to ensure that the content was both accurate and age-appropriate. By integrating animated elements and refining the final product, I helped create educational videos that aligned with curriculum goals and captured students' attention effectively.
+            </p>
+
+            <div class="mb-4">
+              <h4 class="text-sm font-medium mb-2 text-gray-300">
+                Key Responsibilities:
+              </h4>
+              <ul class="space-y-1 text-gray-400 text-sm">
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Animation Video Editing for Educational Content:
+Edit and enhance animation videos specifically designed for elementary school students, ensuring engaging visuals and clear educational messaging.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Creative Design and Storytelling:
+Integrate animated characters, text, and graphics to simplify complex topics and present them in an easily digestible, visually appealing format for young learners.
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Audio and Visual Synchronization:
+Ensure seamless synchronization of animations with voiceovers, background music, and sound effects to maintain student engagement and support the learning process.
+
+
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                 Content Quality Assurance:
+Review and refine animations to ensure accuracy, age-appropriate content, and adherence to educational standards.
+
+
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                 Collaboration with Educational Experts:
+Work closely with educators to align the animation videos with curriculum goals, ensuring the content supports students’ learning objectives effectively.
+
+
+                </li>
+                <li class="flex items-start">
+                  <span
+                    class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5"
+                  >
+                    <i class="ri-arrow-right-s-line"></i>
+                  </span>
+                  Final Delivery and Distribution:
+Implement feedback, finalize animation videos, and prepare them for distribution across various digital learning platforms.
+
+
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Motion Graphic</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Video Editing</span
+              >
+              <span class="text-xs px-3 py-1 rounded-full skill-tag"
+                >Animation</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+   <section id="experience" class="py-10 bg-[#0f172a]">
+  <div class="container mx-auto px-1">
+    <!-- Experience Grid - 4 Columns on Top and 4 on Bottom -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-2 gap-50 mb-12 justify-items-center">
+      <!-- Experience 5 -->
+      <div class="experience-card bg-[#0f172a] p-6 rounded-lg w-full max-w-lg">
+        <div class="flex items-start mb-4">
+          <div class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4">
+            <i class="ri-building-4-line ri-xl text-primary"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Video Editor</h3>
+            <p class="text-primary">Syca (Start Your Content Academy)</p>
+            <p class="text-sm text-gray-400">Jul 2021 – Sep 2022</p>
+          </div>
+        </div>
+        <p class="text-gray-300 mb-4">
+          Edit engaging TikTok clips, Instagram Reels, and educational content for aspiring content creators. Produce promotional videos for ads and brand endorsements, ensuring alignment with brand guidelines. Collaborate with marketing and design teams to create compelling, high-quality content that increases engagement, drives conversions, and maintains brand consistency.
+
+
+        </p>
+        <div class="mb-4">
+          <h4 class="text-sm font-medium mb-2 text-gray-300">Key Responsibilities:</h4>
+          <ul class="space-y-1 text-gray-400 text-sm">
+            <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+             Video Content Editor (TikTok, Reels, Educational Content)
+Responsibilities:
+Edit TikTok, Instagram Reels, and short-form videos. Create educational content with practical tips on content creation. Collaborate with the team to produce engaging content for the target audience.
+            </li>
+             <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+            Ad and Endorsement Content Editor
+Responsibilities:
+Edit promotional and endorsement videos, ensuring alignment with brand guidelines. Enhance ad content for platforms like Instagram, YouTube, and TikTok. Collaborate with marketing teams to create high-converting visuals.
+            </li>
+            <!-- Additional Items -->
+          </ul>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Video Editing</span>
+          
+        </div>
+      </div>
+
+      <!-- Experience 6 -->
+      <div class="experience-card bg-[#0f172a] p-6 rounded-lg w-full max-w-lg">
+        <div class="flex items-start mb-4">
+          <div class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4">
+            <i class="ri-building-4-line ri-xl text-primary"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Video Editor, Motion Graphic</h3>
+            <p class="text-primary">Garena ID</p>
+            <p class="text-sm text-gray-400">Nov 2021 – Jun 2022</p>
+          </div>
+        </div>
+        <p class="text-gray-300 mb-4">
+          Edit engaging and humorous video clips from streamers and Free Fire tournaments on Booyah Live ID to boost viewer engagement. Create TikTok content for Garena Booyah and design promotional motion graphics for Free Fire skins.
+        </p>
+        <div class="mb-4">
+          <h4 class="text-sm font-medium mb-2 text-gray-300">Key Responsibilities:</h4>
+          <ul class="space-y-1 text-gray-400 text-sm">
+            <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+              Editing epic and funny moment video clips from streamers and Free Fire
+tournament events on Booyah Live ID, aimed at increasing viewer engagement.
+            </li>
+             <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+              2.Edit special clips for TikTok content related to Garena Booyah.
+            </li>
+             <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+             3.Create promotional motion graphics for Free Fire skins.
+            </li>
+            <!-- Additional Items -->
+          </ul>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Video Editing</span>
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Motion Graphic</span>
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Broadcaster</span>
+        </div>
+      </div>
+
+      <!-- Add more experience (Experience 2, Experience 3, etc.) here -->
+    </div>
+
+    <!-- Experience Grid at the Bottom -->
+     <div class="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-2 gap-8 mb-12 justify-items-center">
+      <!-- Experience 7 -->
+      <div class="experience-card bg-[#0f172a] p-6 rounded-lg w-full max-w-lg">
+        <div class="flex items-start mb-4">
+          <div class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4">
+            <i class="ri-building-4-line ri-xl text-primary"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Video Editor, Motion Graphic & Animator 2D</h3>
+            <p class="text-primary">Sekolah.mu</p>
+            <p class="text-sm text-gray-400">Februari 2021 – Juni 2022</p>
+          </div>
+        </div>
+        <p class="text-gray-300 mb-4">
+          Edit and enhance educational videos with text, graphics, and animations, ensuring high-quality visuals and sound through color correction and audio adjustments. Create motion graphics and 2D animations to support content, while collaborating with the team to align with the creative vision. Implement feedback and finalize videos for distribution.
+        </p>
+        <div class="mb-4">
+          <h4 class="text-sm font-medium mb-2 text-gray-300">Key Responsibilities:</h4>
+          <ul class="space-y-1 text-gray-400 text-sm">
+            <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+             Video Editing: Edit and enhance educational videos with text, graphics, and
+animations.
+            </li>
+             <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+             2.Motion Graphics & Animation: Create motion graphics and 2D animations to
+support the content.
+            </li>
+             <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+            3.Video Quality: Ensure high-quality visuals and sound through color correction
+and audio adjustments.
+            </li>
+             <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+            4.Collaboration: Work with the team to align with the creative vision and
+incorporate feedback.
+            </li>
+              <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+           5.Final Revisions: Implement feedback and finalize videos for distribution.
+            </li>
+            <!-- Additional Items -->
+          </ul>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Video Editing</span>
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Motion Graphic</span>
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Animation</span>
+        </div>
+      </div>
+
+      <!-- Experience 8 -->
+      <div class="experience-card bg-[#0f172a] p-6 rounded-lg w-full max-w-lg">
+        <div class="flex items-start mb-4">
+          <div class="w-12 h-12 bg-[#2d3748] rounded-lg flex items-center justify-center mr-4">
+            <i class="ri-building-4-line ri-xl text-primary"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">VideoGrapher Editor</h3>
+            <p class="text-primary">Channel 17 Entertainment</p>
+            <p class="text-sm text-gray-400">Apr 2019 – Jan 2020</p>
+          </div>
+        </div>
+        <p class="text-gray-300 mb-4">
+         Edit visual and audio content to ensure high-quality production, working closely with actors and actresses to capture their performances. Collaborate with the production team to incorporate feedback and manage revisions, ensuring the final version aligns with the producer's vision and meets project standards.
+        </p>
+        <div class="mb-4">
+          <h4 class="text-sm font-medium mb-2 text-gray-300">Key Responsibilities:</h4>
+          <ul class="space-y-1 text-gray-400 text-sm">
+            <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+             Edit visual and audio content to achieve high-quality production standards.
+            </li>
+            <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+            Collaborate with actors and actresses to enhance performances.
+            </li>
+            <li class="flex items-start">
+              <span class="w-5 h-5 flex items-center justify-center mr-2 text-primary mt-0.5">
+                <i class="ri-arrow-right-s-line"></i>
+              </span>
+             Manage revisions from the producer to finalize the content for distribution.
+            </li>
+            <!-- Additional Items -->
+          </ul>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Video Editing</span>
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Motion Graphic</span>
+          <span class="text-xs px-3 py-1 rounded-full skill-tag">Broadcaster</span>
+        </div>
+      </div>
+
+      <!-- Add more experience (Experience 6, Experience 7, etc.) -->
+    </div>
+  </div>
+</section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-[#1e293b]">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">
+          My <span class="text-primary">Projects</span>
+        </h2>
+        <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">
+          The creative mind sees beyond the ordinary, transforms the mundane into the extraordinary, and brings color to a world of infinite potential.
+        </p>
+
+        <div class="flex justify-center mb-10">
+          <div class="inline-flex bg-[#0f172a] p-1 rounded-full">
+            <button
+              class="tab-button active px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="all"
+            >
+              All Projects
+            </button>
+            <button
+              class="tab-button px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="ui"
+            >
+              Video Editing
+            </button>
+            <button
+              class="tab-button px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="branding"
+            >
+              Motion Graphics
+            </button>
+            <button
+              class="tab-button px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="motion"
+            >
+              Boradcaster
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="ui"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20mobile%20app%20interface%20design%20for%20finance%20application%20showing%20dashboard%20with%20charts%20and%20statistics%2C%20clean%20minimal%20UI%20design%20with%20dark%20mode%2C%20high%20quality%20professional%20mockup%20on%20smartphone%20screen&width=600&height=800&seq=2&orientation=portrait"
+              alt="FinTrack Mobile App"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Animation</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >After Effec</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="branding"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=elegant%20brand%20identity%20design%20for%20a%20luxury%20fashion%20brand%2C%20showing%20logo%2C%20business%20cards%2C%20and%20packaging%20materials%20arranged%20on%20a%20dark%20background%2C%20professional%20branding%20photography%20with%20high%20contrast%20and%20elegant%20typography&width=800&height=600&seq=3&orientation=landscape"
+              alt="Lumina Fashion Brand"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Motion Graphic</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >After Effect</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Photoshop</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Illustrator</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="motion"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=motion%20graphics%20design%20showing%20animated%203D%20abstract%20shapes%20and%20typography%20elements%2C%20dark%20background%20with%20glowing%20neon%20elements%2C%20frame%20from%20a%20high-end%20motion%20design%20project%20with%20professional%20lighting%20effects&width=800&height=600&seq=4&orientation=landscape"
+              alt="Neon Dreams Animation"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Video Editing</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Illustrator</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Premiere Pro</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >After Effects</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="ui"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=responsive%20website%20design%20for%20a%20modern%20architecture%20firm%2C%20showing%20desktop%20and%20mobile%20versions%20side%20by%20side%2C%20elegant%20minimalist%20web%20design%20with%20large%20image%20gallery%20and%20clean%20typography%2C%20professional%20UI%20design%20mockup&width=800&height=600&seq=5&orientation=landscape"
+              alt="ArchVision Website"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Video Production</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Video editing</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="branding"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=minimalist%20coffee%20shop%20branding%20materials%20including%20logo%2C%20coffee%20cups%2C%20packaging%2C%20and%20menu%20design%2C%20arranged%20on%20a%20dark%20wooden%20table%2C%20professional%20branding%20photography%20with%20warm%20lighting%20and%20rich%20coffee%20tones&width=800&height=600&seq=6&orientation=landscape"
+              alt="Brew & Co Coffee Branding"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">
+                Video Editing
+              </h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >VIdeo Editing</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 6 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="motion"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=product%20explainer%20video%20animation%20showing%203D%20product%20visualization%20with%20technical%20elements%20and%20data%20visualization%2C%20frame%20from%20a%20professional%20motion%20graphics%20project%20with%20sleek%20modern%20style%20and%20technical%20aesthetic&width=800&height=600&seq=7&orientation=landscape"
+              alt="TechPro Product Animation"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">
+                Motion
+              </h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Video Editing</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+    <!-- Corrected Load More Projects Button -->
+<a href="#">
+  <div class="text-center mt-12">
+    <button
+      class="px-8 py-4 bg-[#0f172a] hover:bg-[#1e293b] text-white rounded-button transition-colors whitespace-nowrap text-lg"
+    >
+      Load More Projects
+    </button>
+  </div>
+</a>
+
+<section id="video" class="py-20 bg-[#0f172a]">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold mb-8 text-center">
+      Featured <span class="text-primary">Video</span>
+    </h2>
+    <p class="text-gray-300 text-center max-w-5xl mx-auto mb-12 text-lg">
+      Watch my latest motion design project showcasing my skills in
+      animation, storytelling, and visual effects.
+    </p>
+
+    <div class="max-w-8xl mx-auto">
+      <div class="relative aspect-video bg-[#1e293b] rounded-lg overflow-hidden shadow-xl">
+        <!-- Video Player -->
+        <video id="featured-video" class="w-full h-full object-cover" poster="assets/images/tumb1.png" controls>
+          <source src="assets/videos/AFTER MOVIE TECNO GAME FEST 2024.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Custom Video Controls -->
+        <div class="custom-video-controls absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4">
+          <div class="flex items-center gap-4">
+            <!-- Play/Pause Button -->
+            <button id="video-play-pause" class="w-12 h-12 flex items-center justify-center text-white">
+              <i class="ri-play-fill ri-lg"></i>
+            </button>
+
+            <!-- Progress Bar -->
+            <div class="flex-1">
+              <input
+                type="range"
+                id="video-progress"
+                min="0"
+                value="0"
+                step="0.1"
+                class="w-full"
+              />
+            </div>
+
+            <!-- Time Display -->
+            <div class="text-white text-sm" id="video-time">
+              0:00 / 0:00
+            </div>
+
+            <!-- Mute Button -->
+            <button id="video-mute" class="w-12 h-12 flex items-center justify-center text-white">
+              <i class="ri-volume-up-fill ri-lg"></i>
+            </button>
+
+            <!-- Fullscreen Button -->
+            <button id="video-fullscreen" class="w-12 h-12 flex items-center justify-center text-white">
+              <i class="ri-fullscreen-line ri-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-8">
+  <h3 class="text-3xl font-semibold mb-6">
+    Tecno GameFest
+  </h3>
+  <p class="text-gray-300 mb-6 text-lg">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae eum repellendus incidunt laborum repellat ratione! Porro, veniam architecto eaque eos possimus alias mollitia soluta asperiores earum, est repudiandae neque blanditiis?
+  </p>
+
+  <div class="flex flex-wrap gap-3 mb-8 justify-center">
+    <span class="text-sm px-5 py-3 rounded-full skill-tag">After Effects</span>
+    <span class="text-sm px-5 py-3 rounded-full skill-tag">Cinema 4D</span>
+    <span class="text-sm px-5 py-3 rounded-full skill-tag">3D Animation</span>
+    <span class="text-sm px-5 py-3 rounded-full skill-tag">Motion Graphics</span>
+    <span class="text-sm px-5 py-3 rounded-full skill-tag">Visual Effects</span>
+  </div>
+
+  <div class="flex flex-wrap gap-4 justify-center">
+    <a
+      href="https://drive.google.com/file/d/1IVzmKvNdz584iLafOHwjPrCgO4dbY9HU/view?usp=drive_link"
+      target="_blank"
+      class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-opacity-90 text-white rounded-button transition-colors whitespace-nowrap text-lg"
+    >
+      <span class="w-5 h-5 flex items-center justify-center">
+        <i class="ri-download-line"></i>
+      </span>
+      Download Project File
+    </a>
+  </div>
+  <button
+    class="flex items-center gap-2 px-6 py-3 bg-[#1e293b] hover:bg-[#2d3748] text-white rounded-button transition-colors whitespace-nowrap text-lg"
+  >
+    <span class="w-5 h-5 flex items-center justify-center">
+      <i class="ri-share-line"></i>
+    </span>
+    Share
+  </button>
+</div>
+
+<div class="mt-16">
+  <h3 class="text-3xl font-semibold mb-8 text-center">
+    More Video Projects
+  </h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+   
+    <!-- Video Thumbnail 1 -->
+    <div class="group">
+      <div class="relative aspect-video rounded-lg overflow-hidden mb-3">
+        <img src="https://readdy.ai/api/search-image?query=frame%20from%20a%20product%20explainer%20animation%20with%20clean%20modern%20style%2C%20showing%20a%20mobile%20app%20interface%20with%20data%20visualization%2C%20professional%20motion%20graphics%20with%20technical%20aesthetic&width=600&height=400&seq=9&orientation=landscape"
+          alt="Product Explainer Video"
+          class="w-full h-full object-cover object-top">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <button class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center">
+            <i class="ri-play-fill ri-lg text-white"></i>
+          </button>
+        </div>
+      </div>
+      <h4 class="text-lg font-medium mb-1">Video1</h4>
+      <p class="text-gray-400 text-sm">Motion Graphic</p>
+    </div>
+    <!-- Video Thumbnail 2 -->
+<div class="group">
+  <div class="relative aspect-video rounded-lg overflow-hidden mb-3">
+    <!-- YouTube Video Embed -->
+    <iframe 
+      class="w-full h-full object-cover object-top" 
+      src="https://www.youtube.com/embed/Z27-z1er7lU?si=nCv4abw2XrsWCQLn" 
+      title="Product Explainer Video" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+
+    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+      <!-- Play Button -->
+      <button class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center">
+        <i class="ri-play-fill ri-lg text-white"></i>
+      </button>
+    </div>
+  </div>
+  <h4 class="text-lg font-medium mb-1">Video2</h4>
+  <p class="text-gray-400 text-sm">Podcast</p>
+</div>
+
+    <!-- Video Thumbnail 3 -->
+    <div class="group">
+      <div class="relative aspect-video rounded-lg overflow-hidden mb-3">
+        <img src="https://readdy.ai/api/search-image?query=frame%20from%20an%20abstract%20motion%20graphics%20piece%20with%20colorful%20particle%20effects%20and%20geometric%20shapes%2C%20artistic%20animation%20with%20vibrant%20colors%20against%20dark%20background%2C%20experimental%20motion%20design&width=600&height=400&seq=11&orientation=landscape"
+          alt="Abstract Motion Piece"
+          class="w-full h-full object-cover object-top">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+          <button class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center">
+            <i class="ri-play-fill ri-lg text-white"></i>
+          </button>
+        </div>
+      </div>
+      <h4 class="text-lg font-medium mb-1">Video3</h4>
+      <p class="text-gray-400 text-sm">Experimental animation project</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-[#1e293b]">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">
+      Contact <span class="text-primary">Me</span>
+    </h2>
+    <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">
+      Have a project in mind or want to discuss potential collaborations? I'd love to hear from you.
+    </p>
+
+    <!-- Using Flexbox to place the form and contact info side by side -->
+    <div class="flex flex-col lg:flex-row gap-12 justify-center items-center">
+      
+      <!-- Contact Form -->
+      <div class="w-full lg:w-1/2">
+        <form action="https://formspree.io/f/xyzwnyyz" method="POST" class="space-y-6">
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-sm font-medium mb-2 text-gray-300">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="w-full px-4 py-3 rounded-lg border-none"
+              placeholder="Your name"
+              required
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium mb-2 text-gray-300">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full px-4 py-3 rounded-lg border-none"
+              placeholder="Your email"
+              required
+            />
+          </div>
+
+          <!-- Subject -->
+          <div>
+            <label for="subject" class="block text-sm font-medium mb-2 text-gray-300">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              class="w-full px-4 py-3 rounded-lg border-none"
+              placeholder="Subject"
+              required
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium mb-2 text-gray-300">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="6"
+              class="w-full px-4 py-3 rounded-lg border-none resize-none"
+              placeholder="Your message"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Newsletter Checkbox -->
+          <div class="flex items-center mb-4">
+            <div class="custom-checkbox mr-3" id="newsletter-checkbox"></div>
+            <label for="newsletter-checkbox" class="text-sm text-gray-300 cursor-pointer">
+              Subscribe to my newsletter for design tips and updates
+            </label>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full md:w-auto px-8 py-3 bg-primary hover:bg-opacity-90 text-white rounded-button transition-colors whitespace-nowrap"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="w-full lg:w-1/2">
+        <div class="bg-[#0f172a] p-10 rounded-lg h-full">
+          <h3 class="text-3xl font-semibold mb-6">Contact Information</h3>
+
+          <div class="space-y-6 mb-8">
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center mr-4">
+                <i class="ri-map-pin-line ri-lg text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium mb-1">Location</h4>
+                <p class="text-gray-300">Kota Depok, Jawa Barat, Indonesia</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center mr-4">
+                <i class="ri-mail-line ri-lg text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium mb-1">Email</h4>
+                <a href="mailto:adefranaa@gmail.com" class="text-gray-300 hover:text-primary transition-colors">adefranaa@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-[#1e293b] rounded-lg flex items-center justify-center mr-4">
+                <i class="ri-phone-line ri-lg text-primary"></i>
+              </div>
+              <div>
+                <h4 class="text-lg font-medium mb-1">Phone</h4>
+                <a href="tel:+62 896-1160-6905" class="text-gray-300 hover:text-primary transition-colors">+62 896-1160-6905</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-medium mb-4">Connect With Me</h4>
+            <div class="flex space-x-4">
+              <a href="https://www.linkedin.com/in/misael-ridwan-syahdikin-509a3b161/" class="w-10 h-10 bg-[#1e293b] rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                <i class="ri-linkedin-fill ri-lg"></i>
+              </a>
+              <a href="https://www.instagram.com/heymisaelr/" class="w-10 h-10 bg-[#1e293b] rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                <i class="ri-instagram-fill ri-lg"></i>
+              </a>
+              <a href="https://wa.me/6289611606905?text=Halo,%20saya%20ingin%20bertanya" class="w-10 h-10 bg-[#1e293b] rounded-lg flex items-center justify-center hover:bg-primary transition-colors">
+                <i class="ri-whatsapp-fill ri-lg"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <h4 class="text-lg font-medium mb-4">Availability</h4>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-gray-300">Currently taking new projects</span>
+              <label class="custom-switch">
+                <input type="checkbox" checked />
+                <span class="switch-slider"></span>
+              </label>
+            </div>
+            <p class="text-sm text-gray-400">
+              I'm currently available for freelance projects and consulting work. Typical response time: 1-2 business days.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-[#0f172a] pt-16 pb-8 border-t-4 border-gray-800">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div>
+        <a href="#home" class="text-2xl font-['Pacifico'] text-white mb-4 inline-block">Wann</a>
+        <p class="text-gray-400 mb-6">
+          Creative design solutions for brands and businesses. Transforming
+          ideas into compelling visual experiences.
+        </p>
+        <div class="flex space-x-4">
+          <a href="https://www.linkedin.com/in/misael-ridwan-syahdikin-509a3b161/" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="ri-linkedin-fill ri-lg"></i>
+          </a>
+          <a href="https://wa.me/6289611606905?text=Halo,%20saya%20ingin%20bertanya" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="ri-whatsapp-fill ri-lg"></i>
+          </a>
+          <a href="https://mail.google.com/mail/u/0/?view=cm&tf=1&fs=1&to=adefranaa@gmail.com" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="ri-mail-fill ri-lg"></i>
+          </a>
+          <a href="https://www.instagram.com/heymisaelr/" class="text-gray-400 hover:text-primary transition-colors">
+            <i class="ri-instagram-fill ri-lg"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Other footer columns... -->
+
+    </div>
+
+    <div class="pt-8 border-t-4 border-gray-800 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 Portofolio Ridwan.</p>
+      <div class="flex items-center space-x-6">
+        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Privacy Policy</a>
+        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Terms of Service</a>
+        <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="back-to-top w-12 h-12 bg-primary rounded-full flex items-center justify-center shadow-lg"
+    >
+      <i class="ri-arrow-up-line ri-lg text-white"></i>
+    </button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.toggle("hidden");
+          if (mobileMenu.classList.contains("hidden")) {
+            mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+          } else {
+            mobileMenuButton.innerHTML = '<i class="ri-close-line ri-lg"></i>';
+          }
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("bg-[#0f172a]", "shadow-lg");
+          } else {
+            navbar.classList.remove("bg-[#0f172a]", "shadow-lg");
+          }
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: "smooth",
+              });
+
+              // Close mobile menu if open
+              if (!mobileMenu.classList.contains("hidden")) {
+                mobileMenu.classList.add("hidden");
+                mobileMenuButton.innerHTML = '<i class="ri-menu-line ri-lg"></i>';
+              }
+            }
+          });
+        });
+
+        // Active Navigation Link on Scroll
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", function () {
+          let current = "";
+
+          sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (window.scrollY >= sectionTop - 100) {
+              current = section.getAttribute("id");
+            }
+          });
+
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${current}`) {
+              link.classList.add("active");
+            }
+          });
+        });
+
+        // Project Filtering
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const projectCards = document.querySelectorAll(".project-card");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Update active tab
+            tabButtons.forEach((btn) => btn.classList.remove("active"));
+            this.classList.add("active");
+
+            const category = this.dataset.category;
+
+            projectCards.forEach((card) => {
+              if (category === "all" || card.dataset.category === category) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Custom Checkbox Functionality
+        const newsletterCheckbox = document.getElementById("newsletter-checkbox");
+        const privacyCheckbox = document.getElementById("privacy-checkbox");
+
+        newsletterCheckbox.addEventListener("click", function () {
+          this.classList.toggle("checked");
+        });
+
+        privacyCheckbox.addEventListener("click", function () {
+          this.classList.toggle("checked");
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById("back-to-top");
+
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 500) {
+            backToTopButton.classList.add("visible");
+          } else {
+            backToTopButton.classList.remove("visible");
+          }
+        });
+
+        backToTopButton.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+        // Video Player Functionality
+        const video = document.getElementById("featured-video");
+        const playButton = document.getElementById("video-play-button");
+        const playPauseButton = document.getElementById("video-play-pause");
+        const progressBar = document.getElementById("video-progress");
+        const timeDisplay = document.getElementById("video-time");
+        const muteButton = document.getElementById("video-mute");
+        const fullscreenButton = document.getElementById("video-fullscreen");
+
+        playButton.addEventListener("click", function () {
+          video.play();
+          playButton.style.display = "none";
+          playPauseButton.innerHTML = '<i class="ri-pause-fill ri-lg"></i>';
+        });
+
+        playPauseButton.addEventListener("click", function () {
+          if (video.paused) {
+            video.play();
+            this.innerHTML = '<i class="ri-pause-fill ri-lg"></i>';
+          } else {
+            video.pause();
+            this.innerHTML = '<i class="ri-play-fill ri-lg"></i>';
+          }
+        });
+
+        video.addEventListener("timeupdate", function () {
+          const currentTime = formatTime(video.currentTime);
+          const duration = formatTime(video.duration);
+          timeDisplay.textContent = `${currentTime} / ${duration}`;
+
+          const percentage = (video.currentTime / video.duration) * 100;
+          progressBar.value = percentage;
+        });
+
+        progressBar.addEventListener("input", function () {
+          const time = (progressBar.value / 100) * video.duration;
+          video.currentTime = time;
+        });
+
+        muteButton.addEventListener("click", function () {
+          video.muted = !video.muted;
+          if (video.muted) {
+            this.innerHTML = '<i class="ri-volume-mute-fill ri-lg"></i>';
+          } else {
+            this.innerHTML = '<i class="ri-volume-up-fill ri-lg"></i>';
+          }
+        });
+
+        fullscreenButton.addEventListener("click", function () {
+          if (video.requestFullscreen) {
+            video.requestFullscreen();
+          } else if (video.webkitRequestFullscreen) {
+            video.webkitRequestFullscreen();
+          } else if (video.msRequestFullscreen) {
+            video.msRequestFullscreen();
+          }
+        });
+
+        function formatTime(seconds) {
+          const minutes = Math.floor(seconds / 60);
+          seconds = Math.floor(seconds % 60);
+          return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+
+        // Parallax Effect
+        const parallaxElements = document.querySelectorAll('[data-parallax="true"]');
+
+        window.addEventListener("scroll", function () {
+          parallaxElements.forEach((element) => {
+            const speed = element.dataset.speed || 0.5;
+            const offset = window.scrollY * speed;
+            element.style.transform = `translateY(${offset}px)`;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

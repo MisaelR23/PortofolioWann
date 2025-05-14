@@ -1,0 +1,1285 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: black;
+    color: #e7e7e7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+
+main {
+    flex: 1; /* Ini membuat konten utama mengambil semua ruang yang tersedia */
+}
+
+/* GRADIENT AND LAYER BLUR EFFECT */
+.image-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.layer-blur {
+    height: 0;
+    width: 30rem;
+    position: absolute;
+    top: 20%;
+    right: 0;
+    box-shadow: 0 0 700px 15px white;
+    transform: rotate(-30deg);
+    z-index: -1;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    filter: blur(10px);
+}
+
+/* CONTAINER */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #aaa;
+}
+.btn-signing {
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative; /* Ensure the pseudo-element is positioned correctly */
+    z-index: 1; /* Keeps the button text on top */
+}
+
+.btn-signing::before {
+    content: "";
+    background: linear-gradient(44deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #ff00c8);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 600%;
+    z-index: -1; /* Keeps the glow behind the button */
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    filter: blur(8px);
+    animation: glowing 20s linear infinite;
+    transition: opacity .3s ease-in-out;
+    border-radius: 25px; /* Rounded corners to match the button */
+    opacity: 0;  /* Make the glow invisible initially */
+}
+
+.btn-signing:hover::before {
+    opacity: 1;  /* Show the glow effect on hover */
+}
+
+@keyframes glowing {
+    0% {
+        background-position: 0, 0;
+    }
+    50% {
+        background-position: 400% 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.
+/* MAIN CONTENT */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2rem;
+    min-height: calc(90vh - 6rem);
+}
+
+.content {
+    max-width: 40rem;
+    margin-left: 10%;
+    z-index: 999;
+}
+
+.tag-box {
+    position: relative;
+    width: 100%;
+    max-width: 18rem;
+    height: 2.5rem;
+    border-radius: 50px;
+    background: linear-gradient(to right, #656565, #7f42a7, #6600c5,
+            #5300a0, #757575, #656565);
+    background-size: 200%;
+    animation: animationGradient 2.5s linear infinite;
+    box-shadow: 0 0 15px rgb(255, 255, 255, 0.3);
+}
+
+@keyframes animationGradient {
+    to {
+        background-position: 200%;
+    }
+}
+
+.tag-box .tag {
+    position: absolute;
+    inset: 3px 3px 3px 3px;
+    background-color: black;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.tag-box .tag:hover {
+    color: #5300a0;
+}
+
+.content h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    margin: 2rem 0;
+    line-height: 1.2;
+    text-shadow: 0 0 10px rgba(128, 128, 128, 0.614);
+}
+
+.description {
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+    max-width: 35rem;
+    color: gray;
+    line-height: 1.6;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.btn-get-started {
+    text-decoration: none;
+    background-color: lightgray;
+    color: black;
+    padding: 0.6rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-get-started:hover {
+    background-color: white;
+}
+
+.btn-documentation {
+    background: transparent;
+    border: 1px solid #a268f6;
+    color: #a268f6;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-documentation:hover {
+    background-color: #1a1a1a;
+    text-decoration: underline;
+}
+
+.btn-signing-main {
+    text-decoration: none;
+    background-color: lightgray;
+    color: black;
+    padding: 0.6rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-signing-main:hover {
+    background-color: white;
+}
+
+robot-3d {
+    position: absolute;
+    top: 0;
+    right: -50%;
+    size: 30%;
+}
+
+/* Tablet view (768px - 1024px) */
+@media (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 2rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    .content {
+        margin-left: 5%;
+        max-width: 90%;
+    }
+
+    .content h1 {
+        font-size: 3rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .btn-get-started,
+    .btn-signing-main,
+    .btn-documentation {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Mobile view (<768px) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1rem 1.5rem;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        margin-left: 0;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .content {
+        margin: 0;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .content h1 {
+        font-size: 2.5rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-get-started,
+    .btn-signing-main,
+    .btn-documentation {
+        width: 90%;
+    }
+
+    .tag-box {
+        width: 100%;
+    }
+
+    .robot-3d {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;  /* Pastikan lebar 100% agar menyesuaikan dengan ukuran layar */
+        height: auto;  /* Menyesuaikan tinggi dengan lebar untuk menjaga rasio aspek */
+        max-height: 500px; /* Batasi tinggi maksimum pada perangkat kecil */
+        z-index: 1;
+    }
+    
+    /* Responsif: Mobile view */
+    @media (max-width: 768px) {
+        .robot-3d {
+            position: relative;
+            width: 100%;  /* Pastikan lebar 100% di perangkat mobile */
+            height: 300px; /* Atur tinggi menjadi lebih kecil pada layar kecil */
+            max-height: 300px; /* Batasi tinggi untuk perangkat mobile */
+        }
+    }
+    
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-top: 3rem;
+    flex-wrap: wrap;
+  }
+  
+  .side-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 25rem;
+    flex: 1;
+  }
+  
+  .card {
+    background-color: #121212;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #ccc;
+  }
+  
+  /* Responsif: Stack vertikal di mobile */
+  @media (max-width: 768px) {
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .side-content {
+      max-width: 100%;
+    }
+  }
+
+  .card {
+    background-color: #121212;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.7s ease both;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  }
+  
+  .card .icon {
+    width: 36px;
+    height: 36px;
+    color: #a268f6;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Animasi sederhana */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+ /* Logo Slider */
+.logo-slider {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start; /* Justify logos starting from the left */
+    animation: slide 60s linear infinite; /* Durasi animasi lebih lama agar tidak terlalu cepat */
+    overflow: hidden; /* Pastikan logo tidak melampaui batas */
+}
+
+.logo-slider img {
+    max-width: 150px;
+    margin: 0 10px;
+}
+
+/* Keyframes untuk animasi logo yang bergerak dari kanan ke kiri */
+@keyframes slide {
+    0% {
+        transform: translateX(100%); /* Mulai dari sebelah kanan */
+    }
+    100% {
+        transform: translateX(-100%); /* Geser ke sebelah kiri */
+    }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .logo-slider img {
+        max-width: 120px;
+    }
+    .logo-slider {
+        animation: slide 20s linear infinite; /* Kecepatan animasi lebih cepat di perangkat mobile */
+    }
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: black;
+    color: #e7e7e7;
+    line-height: 1.5;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;  /* Membuat konten kiri dan kanan berdampingan */
+    align-items: center;
+    gap: 2rem; /* Jarak antara konten kiri dan kanan */
+    padding: 2rem 0;
+}
+
+/* Left Side (Foto Besar) */
+.left-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.large-photo {
+    max-width: 70%; /* Memperkecil gambar */
+    height: auto;
+    border-radius: 10px; /* Memberikan efek sudut melengkung */
+}
+
+/* Right Side (Konten) */
+.right-side {
+    flex: 1;
+    text-align: left;
+}
+
+/* Styling untuk Heading dan Paragraf */
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.2rem;
+    color: gray;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Navigation */
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #aaa;
+}
+
+.btn-signing {
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+}
+/* Navigation and Dropdown Styles */
+nav {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .dropdown {
+    position: relative;  /* Position for the submenu */
+  }
+  
+  .about-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .about-link:hover {
+    color: #aaa;
+  }
+
+  .showcase
+{
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  transition: 0.5s;
+  z-index: 2;
+}
+  
+.showcase header{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+.toggle{
+   position: relative;
+   width: 60px;
+   height: 60px;
+   background: url('menu.png');
+   background-repeat: no-repeat;
+   background-size: 30px;
+   background-position: center;
+   cursor: pointer;
+   z-index: 2;
+   justify-content: space-between;
+}
+
+.logo{
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.showcase video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;  /* Pastikan video selalu memenuhi tinggi layar */
+    object-fit: cover;  /* Memastikan video mengisi layar tanpa terdistorsi */
+    opacity: 0.8;
+    z-index: -1;  /* Video berada di bawah konten */
+}
+
+/* Responsif untuk perangkat mobile */
+@media (max-width: 768px) {
+    .showcase video {
+        position: fixed;  /* Pastikan video tetap di posisi tetap */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;  /* Menjamin video memenuhi seluruh viewport */
+        object-fit: cover;
+        opacity: 0.8;
+        z-index: -1;  /* Video tetap berada di bawah konten lainnya */
+    }
+}
+
+/* Tambahan untuk perangkat iPhone dan perangkat lain dengan ukuran layar serupa */
+@media (max-width: 1024px) {
+    .showcase video {
+        position: fixed;  /* Gunakan fixed agar video tetap pada posisi tetap */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;  /* Menjamin video memenuhi layar secara penuh */
+        object-fit: cover;
+        opacity: 0.8;
+        z-index: -1;
+    }
+}
+
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    mix-blend-mode: overlay;
+}
+
+.text {
+    padding: 120px;
+    position: relative;
+    z-index: 10;
+    text-align: right;
+    font-size: small}
+
+.text h2
+{
+  font-size: 5em;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.text p
+{
+  font-size: 1.1em;
+  color: #fff;
+  margin: 20px 0;
+  font-weight: 400;
+  max-width: 700px;
+  text-align: left;
+  
+}
+.text a
+{
+  display:inline-block; ;
+  font-size: 1em;
+  background: #fff;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #111;
+  letter-spacing: 2px;
+  transition: 0.2s;
+  
+}
+.text a:hover
+{
+  letter-spacing: 6px;
+}
+
+.social {
+    position: absolute;
+    z-index: 10;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 50px;
+}
+
+.social li {
+    list-style: none;
+}
+
+.social li a {
+    display: inline-block;
+    margin-right: 10px; /* Mengurangi jarak antar ikon */
+    filter: invert(1);
+    transform: scale(0.6); /* Memperbesar ikon sedikit */
+    transition: 0.5s;
+}
+
+.social li a:hover {
+    transform: scale(0.6) translateY(-15px); /* Efek hover untuk perbesaran ikon */
+}
+
+@media(max-width: 991px) {
+    .showcase, .showcase header {
+        padding: 40px;
+    }
+    
+    .text h2{
+        font-size: 3em;
+    }
+}
+.social li img {
+    filter: invert(1); /* Mengubah warna gambar menjadi putih */
+    transform: scale(0.6); /* Memperbesar ikon sedikit */
+    transition: 0.5s;
+}
+
+.social li img:hover {
+    transform: scale(0.6) translateY(-15px); /* Efek hover untuk perbesaran ikon */
+}
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0; 
+    background: linear-gradient( to right, #171111, #3C3C47,#425054);
+    color: #fff;
+    padding: 100px 0 30px;
+    border-top-left-radius: 125px;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.row {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.col{
+    flex: 1;
+    padding: 20px;
+}
+
+.logofooter {
+    width: 80px;
+    margin-bottom: 30px;
+}
+
+.col h3 {
+    width: fit-content;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.email-id {
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+    padding-bottom: 5px; /* Menambahkan padding bawah untuk memastikan border terlihat */
+    color: #e7e7e7; /* Pastikan warna teks cukup kontras */
+}
+
+ul li{
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+ul li a{
+    text-decoration: none; /* Corrected the typo */
+    color: #fff;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing between input and button */
+}
+
+form input {
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    color: #333;
+    width: 250px; /* Adjust width as necessary */
+    margin-right: 5px; /* Adjust margin to reduce gap with button */
+}
+
+form button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px; /* Adjust padding for better alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form button svg {
+    color: #fff; /* Change arrow color to white */
+    width: 20px;
+    height: 20px;
+}
+
+
+footer {
+    background: linear-gradient(to right, #171111, #3C3C47, #425054);
+    color: #fff;
+    padding: 100px 0 30px;
+    border-top-left-radius: 125px;
+    font-size: 13px;
+    line-height: 20px;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    text-align: left; /* Align text to the left */
+}
+
+.row {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start; /* Align the columns to the left */
+}
+
+.col {
+    flex: 1;
+    padding: 20px;
+    text-align: left; /* Ensures the content within each column is aligned to the left */
+}
+
+.email-id {
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin: 20px 0;
+    padding-bottom: 5px; 
+    color: #e7e7e7;
+    text-align: left; /* Align text to the left inside the email input */
+}
+
+ul li {
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #fff;
+    text-align: left; /* Align social media links to the left */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  color: #e8e8e8;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.content .heading {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.content .para {
+  line-height: 1.5;
+}
+
+.content .btn {
+  color: #e8e8e8;
+  text-decoration: none;
+  padding: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(-45deg, #883FE0 0%, #F37E7E 100% );
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(-45deg, #883FE0 0%, #F37E7E 100% );
+  z-index: -1;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover::before {
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: none;
+}
+
+.card:hover .btn {
+  color: #212121;
+  background: #e8e8e8;
+}
+
+.content .btn:hover {
+  outline: 2px solid #e8e8e8;
+  background: transparent;
+  color: #e8e8e8;
+}
+
+.content .btn:active {
+  box-shadow: none;
+}
+/* Mengatur kontainer kartu */
+.cards-container {
+    display: flex;
+    justify-content: center; /* Agar kartu terpusat */
+    gap: 30px; /* Menambahkan jarak lebih lebar antar kartu */
+    margin-top: 30px; /* Menambahkan jarak antara atas dan kartu */
+    flex-wrap: wrap; /* Menyusun kartu dengan cara membungkus */
+    padding: 20px;
+}
+
+/* Mengatur kartu */
+.card {
+    width: 300px; /* Lebar kartu */
+    background-color: #121212; /* Warna latar belakang kartu */
+    padding: 20px; /* Menambahkan padding di dalam kartu */
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 30px; /* Menambah jarak bawah antar kartu */
+}
+
+/* Responsif pada tablet */
+@media screen and (max-width: 1024px) {
+    .cards-container {
+        justify-content: space-evenly; /* Meratakan kartu pada tablet */
+        padding: 15px; /* Memberikan padding tambahan pada kontainer */
+    }
+
+    .card {
+        width: 250px; /* Lebar kartu pada tablet */
+        padding: 15px; /* Mengurangi padding kartu pada tablet */
+    }
+}
+
+/* Responsif untuk perangkat mobile */
+@media screen and (max-width: 768px) {
+    .cards-container {
+        flex-direction: column; /* Menumpuk kartu pada layar kecil */
+        align-items: center; /* Memusatkan kartu */
+        gap: 15px; /* Menyesuaikan jarak antar kartu */
+        padding: 10px; /* Mengurangi padding pada mobile */
+    }
+
+    .card {
+        width: 80%; /* Membuat kartu lebih lebar pada perangkat mobile */
+        margin-bottom: 15px; /* Menambah jarak antar kartu pada perangkat mobile */
+        padding: 15px; /* Menyesuaikan padding kartu */
+    }
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    rotateY(calc( (var(--position) - 1) *(360 / var(--quantity))* 1deg));
+    transform: translateZ(550px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+.banner {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
+}
+
+@keyframes autoRun {
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+        translateZ(550px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .content h1 {
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    color: #25283B;
+    position: relative;
+}
+
+.banner .content h1::after {
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #d2d2d2;
+    color: transparent;
+}
+
+.banner .content .author {
+    font-family: Poppins;
+    text-align: right;
+    max-width: 200px;
+}
+
+.banner .content h2 {
+    font-size: 3em;
+}
+
+.banner .content .model {
+    background-image: url(''); /* Ensure this path is correct */
+    width: 130%;
+    height: 75vh; /* Adjust the height for responsiveness */
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    transform: translateX(-50%);
+    background-size: contain; /* Ensures the image scales while maintaining aspect ratio */
+    background-position: center; /* Keeps the image centered */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    z-index: 1;
+}
+
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 160px;
+        height: 200px;
+        left: calc(50% - 80px);
+    }
+
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(300px);
+    }
+
+    .banner .content h1 {
+        text-align: center;
+        width: 100%;
+        text-shadow: 0 10px 20px #000;
+        font-size: 7em;
+    }
+
+    .banner .content .author {
+        color: #fff;
+        padding: 20px;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+
+    .banner .content .model {
+        width: 150%; /* Adjusted for smaller screens */
+        height: 60vh; /* Reduced height for smaller screens */
+        left: 0; /* Reset left position */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px;
+        height: 150px;
+        left: calc(50% - 50px);
+    }
+
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg))
+            translateZ(180px);
+    }
+
+    .banner .content h1 {
+        font-size: 5em;
+    }
+
+    .banner .content .model {
+        width: 160%; /* Even larger for small screens */
+        height: 60vh; /* Adjusted for mobile */
+        left: -10%; /* Shifted slightly left */
+    }
+}
+
+body {
+    background-color: #000;
+    background-image:
+        repeating-linear-gradient(to right, transparent 0 100px, #25283b22 100px 101px),
+        repeating-linear-gradient(to bottom, transparent 0 100px, #25283b22 100px 101px),
+        url('assets/images/bg.png'); /* Ensure the background image is correct */
+    background-size: cover, cover; /* Ensure background image fills the screen */
+    background-position: top center;
+    background-repeat: no-repeat; /* Prevents the background from repeating */
+}
+.running-text {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 10px 0;
+    text-align: center;
+    position: absolute;
+    top: 50px;  /* Adjust this value to move the text down */
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+/* Animasi untuk teks berjalan */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.robot-4d {
+    right: 3%;
+    top: -10%;
+    position: absolute;
+}
