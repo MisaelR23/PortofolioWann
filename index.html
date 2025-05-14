@@ -1685,13 +1685,61 @@ incorporate feedback.
       animation, storytelling, and visual effects.
     </p>
 
-    <div class="max-w-8xl mx-auto">
-      <div class="relative aspect-video bg-[#1e293b] rounded-lg overflow-hidden shadow-xl">
-        <!-- Video Player -->
-        <video id="featured-video" class="w-full h-full object-cover" poster="assets/images/tumb1.png" controls>
-          <source src="assets/videos/AFTER MOVIE TECNO GAME FEST 2024.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+ <!-- YouTube Video Player -->
+<section class="relative">
+  <div class="video-container w-200 mx-auto relative" style="padding-bottom: 56.25%;">
+    <div class="absolute top-0 left-0 w-full h-full">
+      <!-- YouTube Embed -->
+      <iframe
+        id="featured-video"
+        class="w-full h-full object-cover"
+        src="https://www.youtube.com/embed/eDShhAxesRg?si=uliVd08QaPpiJpcx"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+      <!-- Custom Video Controls -->
+      <div class="custom-video-controls absolute bottom-8 left-1/2 transform -translate-x-1/2 px-8">
+        <div class="flex items-center gap-8">
+          <!-- Play/Pause Button -->
+          <button id="video-play-pause" class="w-16 h-16 flex items-center justify-center text-white">
+            <i class="ri-play-fill ri-lg"></i>
+          </button>
+
+          <!-- Progress Bar -->
+          <div class="flex-1">
+            <input
+              type="range"
+              id="video-progress"
+              min="0"
+              value="0"
+              step="0.1"
+              class="w-full"
+            />
+          </div>
+
+          <!-- Time Display -->
+          <div class="text-white text-lg" id="video-time">
+            0:00 / 0:00
+          </div>
+
+          <!-- Mute Button -->
+          <button id="video-mute" class="w-16 h-16 flex items-center justify-center text-white">
+            <i class="ri-volume-up-fill ri-lg"></i>
+          </button>
+
+          <!-- Fullscreen Button -->
+          <button id="video-fullscreen" class="w-16 h-16 flex items-center justify-center text-white">
+            <i class="ri-fullscreen-line ri-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         <!-- Custom Video Controls -->
         <div class="custom-video-controls absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4">
@@ -1733,14 +1781,15 @@ incorporate feedback.
     </div>
   </div>
 </section>
-
-<div class="mt-8">
+<div class="mt-8 text-center">
   <h3 class="text-3xl font-semibold mb-6">
     Tecno GameFest
   </h3>
-  <p class="text-gray-300 mb-6 text-lg">
+  <p class="text-gray-300 mb-6 text-lg mx-auto">
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae eum repellendus incidunt laborum repellat ratione! Porro, veniam architecto eaque eos possimus alias mollitia soluta asperiores earum, est repudiandae neque blanditiis?
   </p>
+</div>
+
 
   <div class="flex flex-wrap gap-3 mb-8 justify-center">
     <span class="text-sm px-5 py-3 rounded-full skill-tag">After Effects</span>
