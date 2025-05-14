@@ -1747,37 +1747,102 @@ incorporate feedback.
   </h3>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
    
-    <!-- Video Thumbnail 1 -->
-    <div class="group">
-      <div class="relative aspect-video rounded-lg overflow-hidden mb-3">
-        <img src="https://readdy.ai/api/search-image?query=frame%20from%20a%20product%20explainer%20animation%20with%20clean%20modern%20style%2C%20showing%20a%20mobile%20app%20interface%20with%20data%20visualization%2C%20professional%20motion%20graphics%20with%20technical%20aesthetic&width=600&height=400&seq=9&orientation=landscape"
-          alt="Product Explainer Video"
-          class="w-full h-full object-cover object-top">
-        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-          <button class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center">
-            <i class="ri-play-fill ri-lg text-white"></i>
-          </button>
-        </div>
-      </div>
-      <h4 class="text-lg font-medium mb-1">Video1</h4>
-      <p class="text-gray-400 text-sm">Motion Graphic</p>
+      <!-- Video Thumbnail 1 -->
+<div class="group">
+  <div class="relative aspect-video rounded-lg overflow-hidden mb-3">
+    <img 
+      src="https://readdy.ai/api/search-image?query=frame%20from%20a%20product%20explainer%20animation%20with%20clean%20modern%20style%2C%20showing%20a%20mobile%20app%20interface%20with%20data%20visualization%2C%20professional%20motion%20graphics%20with%20technical%20aesthetic&width=600&height=400&seq=9&orientation=landscape"
+      alt="Product Explainer Video"
+      class="w-full h-full object-cover object-top"
+    >
+    <div id="videoOverlay1" class="video-overlay absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+      <!-- Play Button -->
+      <button 
+        class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center" 
+        onclick="playVideo1()">
+        <i class="ri-play-fill ri-lg text-white"></i>
+      </button>
     </div>
-    <!-- Video Thumbnail 2 -->
+  </div>
+  <h4 class="text-lg font-medium mb-1">Video1</h4>
+  <p class="text-gray-400 text-sm">Motion Graphic</p>
+</div>
+
+<script>
+  function playVideo1() {
+    // Get the image, play button, and video overlay for Video 1
+    const img = document.querySelector('.group img');
+    const playButton = document.querySelector('#videoOverlay1 button');
+    const overlay = document.getElementById('videoOverlay1');
+
+    // Create the iframe dynamically and add it inside the video container
+    const iframe = document.createElement('iframe');
+    iframe.classList.add('w-full', 'h-full', 'object-cover', 'object-top');
+    iframe.src = "https://www.youtube.com/embed/Z27-z1er7lU?autoplay=1";
+    iframe.frameborder = "0";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowfullscreen = true;
+
+    // Replace the image with the iframe
+    img.replaceWith(iframe);
+
+    // Hide the play button and remove overlay class once the video starts
+    playButton.style.display = 'none';
+    overlay.classList.add('video-playing'); // Add class to hide overlay
+
+    // Optional: Hide the overlay completely
+    setTimeout(() => {
+      overlay.style.display = 'none'; // Hide overlay after a short delay
+    }, 500);
+  }
+</script>
+
+<style>
+  /* Video Overlay Styling */
+  .video-overlay {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Hide overlay once video is playing */
+  .video-playing .video-overlay {
+    opacity: 0;
+    pointer-events: none; /* Disable interaction with overlay */
+  }
+</style>
+
+   <!-- Video Thumbnail 2 -->
+<style>
+  /* Pastikan overlay yang menutupi video hilang setelah play */
+  .video-overlay {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Mengubah overlay menjadi tidak mengganggu setelah video diputar */
+  .video-playing .video-overlay {
+    opacity: 0; /* Menyembunyikan overlay */
+    pointer-events: none; /* Menonaktifkan interaksi dengan overlay */
+  }
+</style>
+
 <div class="group">
   <div class="relative aspect-video rounded-lg overflow-hidden mb-3">
     <!-- YouTube Video Embed -->
     <iframe 
       class="w-full h-full object-cover object-top" 
-      src="https://www.youtube.com/embed/Z27-z1er7lU?si=nCv4abw2XrsWCQLn" 
+      id="videoIframe" 
+      src="https://www.youtube.com/embed/BXySl7fHmBE?si=tG-KonWI2-3H00WG" 
       title="Product Explainer Video" 
       frameborder="0" 
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
       allowfullscreen>
     </iframe>
 
-    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+    <div id="videoOverlay" class="video-overlay absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
       <!-- Play Button -->
-      <button class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center">
+      <button 
+        id="playButton" 
+        class="w-12 h-12 bg-primary bg-opacity-90 rounded-full flex items-center justify-center z-20" 
+        onclick="playVideo()">
         <i class="ri-play-fill ri-lg text-white"></i>
       </button>
     </div>
@@ -1785,6 +1850,27 @@ incorporate feedback.
   <h4 class="text-lg font-medium mb-1">Video2</h4>
   <p class="text-gray-400 text-sm">Podcast</p>
 </div>
+
+<script>
+  function playVideo() {
+    // Get the iframe, play button, and video overlay
+    const iframe = document.getElementById('videoIframe');
+    const playButton = document.getElementById('playButton');
+    const overlay = document.getElementById('videoOverlay');
+
+    // Start the video by setting autoplay parameter to 1
+    iframe.src = iframe.src + "?autoplay=1";
+
+    // Hide the play button and remove overlay class once the video starts
+    playButton.style.display = 'none';
+    overlay.classList.add('video-playing'); // Add class to hide overlay
+
+    // Optional: Hide the overlay completely
+    setTimeout(() => {
+      overlay.style.display = 'none'; // Hide overlay after a short delay
+    }, 500);
+  }
+</script>
 
     <!-- Video Thumbnail 3 -->
     <div class="group">
