@@ -1,0 +1,278 @@
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-[#1e293b]">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">
+          My <span class="text-primary">Projects</span>
+        </h2>
+        <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12">
+          The creative mind sees beyond the ordinary, transforms the mundane into the extraordinary, and brings color to a world of infinite potential.
+        </p>
+
+        <div class="flex justify-center mb-10">
+          <div class="inline-flex bg-[#0f172a] p-1 rounded-full">
+            <button
+              class="tab-button active px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="all"
+            >
+              All Projects
+            </button>
+            <button
+              class="tab-button px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="ui"
+            >
+              Video Editing
+            </button>
+            <button
+              class="tab-button px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="branding"
+            >
+              Motion Graphics
+            </button>
+            <button
+              class="tab-button px-4 py-2 rounded-full whitespace-nowrap"
+              data-category="motion"
+            >
+              Boradcaster
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="ui"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20mobile%20app%20interface%20design%20for%20finance%20application%20showing%20dashboard%20with%20charts%20and%20statistics%2C%20clean%20minimal%20UI%20design%20with%20dark%20mode%2C%20high%20quality%20professional%20mockup%20on%20smartphone%20screen&width=600&height=800&seq=2&orientation=portrait"
+              alt="FinTrack Mobile App"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Animation</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >After Effec</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="branding"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=elegant%20brand%20identity%20design%20for%20a%20luxury%20fashion%20brand%2C%20showing%20logo%2C%20business%20cards%2C%20and%20packaging%20materials%20arranged%20on%20a%20dark%20background%2C%20professional%20branding%20photography%20with%20high%20contrast%20and%20elegant%20typography&width=800&height=600&seq=3&orientation=landscape"
+              alt="Lumina Fashion Brand"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Motion Graphic</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >After Effect</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Photoshop</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Illustrator</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="motion"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=motion%20graphics%20design%20showing%20animated%203D%20abstract%20shapes%20and%20typography%20elements%2C%20dark%20background%20with%20glowing%20neon%20elements%2C%20frame%20from%20a%20high-end%20motion%20design%20project%20with%20professional%20lighting%20effects&width=800&height=600&seq=4&orientation=landscape"
+              alt="Neon Dreams Animation"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Video Editing</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Illustrator</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Premiere Pro</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >After Effects</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="ui"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=responsive%20website%20design%20for%20a%20modern%20architecture%20firm%2C%20showing%20desktop%20and%20mobile%20versions%20side%20by%20side%2C%20elegant%20minimalist%20web%20design%20with%20large%20image%20gallery%20and%20clean%20typography%2C%20professional%20UI%20design%20mockup&width=800&height=600&seq=5&orientation=landscape"
+              alt="ArchVision Website"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">Video Production</h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Video editing</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="branding"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=minimalist%20coffee%20shop%20branding%20materials%20including%20logo%2C%20coffee%20cups%2C%20packaging%2C%20and%20menu%20design%2C%20arranged%20on%20a%20dark%20wooden%20table%2C%20professional%20branding%20photography%20with%20warm%20lighting%20and%20rich%20coffee%20tones&width=800&height=600&seq=6&orientation=landscape"
+              alt="Brew & Co Coffee Branding"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">
+                Video Editing
+              </h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >VIdeo Editing</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+
+          <!-- Project 6 -->
+          <div
+            class="project-card rounded-lg overflow-hidden"
+            data-category="motion"
+          >
+            <img
+              src="https://readdy.ai/api/search-image?query=product%20explainer%20video%20animation%20showing%203D%20product%20visualization%20with%20technical%20elements%20and%20data%20visualization%2C%20frame%20from%20a%20professional%20motion%20graphics%20project%20with%20sleek%20modern%20style%20and%20technical%20aesthetic&width=800&height=600&seq=7&orientation=landscape"
+              alt="TechPro Product Animation"
+              class="w-full h-64 object-cover object-top"
+            />
+            <div class="project-overlay p-6">
+              <h3 class="text-xl font-semibold mb-2">
+                Motion
+              </h3>
+              <p class="text-gray-300 mb-4 text-center">
+                Paragraf
+              </p>
+              <div class="flex flex-wrap gap-2 justify-center mb-4">
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Video Editing</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Motion</span
+                >
+                <span
+                  class="text-xs px-3 py-1 rounded-full bg-opacity-20 bg-primary text-primary"
+                  >Animation</span
+                >
+              </div>
+              <button
+                class="px-4 py-2 bg-primary text-white rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+            <!-- Corrected Load More Projects Button -->
+<a href="#">
+  <div class="text-center mt-12">
+    <button
+      class="px-8 py-4 bg-[#0f172a] hover:bg-[#1e293b] text-white rounded-button transition-colors whitespace-nowrap text-lg"
+    >
+      Load More Projects
+    </button>
+  </div>
+</a>
